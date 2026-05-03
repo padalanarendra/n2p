@@ -588,10 +588,234 @@
       text-transform: uppercase;
       margin-top: 8px
     }
+
+    /* ══════════════════════════════════════
+       CURTAIN — pause all main animations
+    ══════════════════════════════════════ */
+    body.curtain-on .letter-wrap-n,
+    body.curtain-on .letter-wrap-p,
+    body.curtain-on .meets-wrap,
+    body.curtain-on .orn-line,
+    body.curtain-on .orn-diamond,
+    body.curtain-on .meets-heart,
+    body.curtain-on .divider-orn,
+    body.curtain-on .date-text,
+    body.curtain-on .subtitle,
+    body.curtain-on .countdown,
+    body.curtain-on .floral-tl,
+    body.curtain-on .floral-br { animation-play-state: paused !important; }
+
+    /* Curtain wrapper */
+    #curtain {
+      position: fixed; inset: 0; z-index: 300;
+      cursor: pointer; overflow: hidden;
+    }
+
+    /* Left & Right panels */
+    .c-panel-l, .c-panel-r {
+      position: absolute; top: 0; width: 50%; height: 100%;
+      transition: transform 1.8s cubic-bezier(.77,0,.18,1);
+      will-change: transform;
+    }
+    .c-panel-l { left: 0; transform-origin: left center; }
+    .c-panel-r { right: 0; transform-origin: right center; }
+
+    /* Velvet fabric — left */
+    .c-fabric-l {
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(0,0,0,.22) 0, rgba(0,0,0,.22) 1px,
+          transparent 1px, transparent 18px,
+          rgba(255,255,255,.025) 18px, rgba(255,255,255,.025) 19px,
+          transparent 19px, transparent 36px),
+        linear-gradient(to right, #0e0000 0%, #4a0505 40%, #6e0c0c 75%, #7a1010 100%);
+    }
+    /* Velvet fabric — right (mirrored) */
+    .c-fabric-r {
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(90deg,
+          rgba(0,0,0,.22) 0, rgba(0,0,0,.22) 1px,
+          transparent 1px, transparent 18px,
+          rgba(255,255,255,.025) 18px, rgba(255,255,255,.025) 19px,
+          transparent 19px, transparent 36px),
+        linear-gradient(to left, #0e0000 0%, #4a0505 40%, #6e0c0c 75%, #7a1010 100%);
+    }
+
+    /* Gold inner-edge trim */
+    .c-trim-l {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(to bottom, transparent, #f5d878 15%, #d4a445 50%, #f5d878 85%, transparent);
+      box-shadow: 0 0 14px 2px rgba(212,164,69,.55), inset 0 0 6px rgba(255,240,180,.4);
+    }
+    .c-trim-r {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+      background: linear-gradient(to bottom, transparent, #f5d878 15%, #d4a445 50%, #f5d878 85%, transparent);
+      box-shadow: 0 0 14px 2px rgba(212,164,69,.55), inset 0 0 6px rgba(255,240,180,.4);
+    }
+
+    /* Pelmet / valance across the top */
+    .c-pelmet {
+      position: absolute; top: 0; left: 0; right: 0; height: clamp(60px,12vw,110px);
+      z-index: 10; pointer-events: none;
+      background: linear-gradient(to bottom, #0e0000 0%, #6e0c0c 60%, transparent 100%);
+      border-bottom: 1px solid rgba(212,164,69,.3);
+    }
+    .c-pelmet-arch {
+      position: absolute; bottom: -1px; left: 0; right: 0;
+      display: flex; justify-content: center;
+    }
+
+    /* Floating sparkles on curtain */
+    .c-sparkle {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(245,216,120,.9) 0%, transparent 70%);
+      animation: sparkleFloat linear infinite;
+      pointer-events: none;
+    }
+    @keyframes sparkleFloat {
+      0%   { transform: translateY(0) scale(1);   opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: .6; }
+      100% { transform: translateY(-90px) scale(.4); opacity: 0; }
+    }
+
+    /* Central emblem */
+    .c-emblem {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
+      z-index: 20; pointer-events: none;
+    }
+    .c-ring {
+      width: clamp(80px,14vw,130px); height: clamp(80px,14vw,130px);
+      border-radius: 50%;
+      border: 1px solid rgba(212,164,69,.35);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      animation: ringRotate 12s linear infinite;
+    }
+    @keyframes ringRotate {
+      to { transform: rotate(360deg); }
+    }
+    .c-ring::before {
+      content: '';
+      position: absolute; inset: 6px; border-radius: 50%;
+      border: 1px solid rgba(212,164,69,.2);
+    }
+    .c-heart {
+      font-size: clamp(28px,5vw,50px);
+      animation: heartbeat 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 12px rgba(212,164,69,.7));
+      display: inline-block;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1); }
+      30%     { transform: scale(1.15); }
+      60%     { transform: scale(.95); }
+    }
+
+    /* Prompt text */
+    .c-prompt {
+      margin-top: clamp(18px,3vw,30px);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px,2.2vw,22px);
+      font-weight: 300;
+      color: rgba(245,216,120,.85);
+      letter-spacing: .18em;
+      text-align: center;
+      animation: promptPulse 2.2s ease-in-out infinite;
+      line-height: 1.6;
+    }
+    .c-prompt-sub {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(9px,1.2vw,12px);
+      font-weight: 200;
+      color: rgba(212,164,69,.5);
+      letter-spacing: .35em;
+      text-transform: uppercase;
+      margin-top: 8px;
+      animation: promptPulse 2.2s .4s ease-in-out infinite;
+    }
+    @keyframes promptPulse {
+      0%,100% { opacity: .6; }
+      50%     { opacity: 1; }
+    }
+
+    /* Open state */
+    #curtain.opening .c-panel-l { transform: translateX(-100%); }
+    #curtain.opening .c-panel-r { transform: translateX(100%); }
+    #curtain.opening .c-emblem  { opacity: 0; transition: opacity .4s; }
+    #curtain.gone { display: none; }
   </style>
 </head>
 
-<body>
+<body class="curtain-on">
+
+  <!-- ══ CURTAIN ══════════════════════════════════ -->
+  <div id="curtain">
+
+    <!-- Left panel -->
+    <div class="c-panel-l">
+      <div class="c-fabric-l"></div>
+      <div class="c-trim-l"></div>
+      <!-- Sparkles -->
+      <div class="c-sparkle" style="width:5px;height:5px;left:20%;top:30%;animation-duration:3.2s;animation-delay:0s"></div>
+      <div class="c-sparkle" style="width:4px;height:4px;left:65%;top:55%;animation-duration:4s;animation-delay:1.1s"></div>
+      <div class="c-sparkle" style="width:3px;height:3px;left:40%;top:70%;animation-duration:2.8s;animation-delay:.5s"></div>
+      <div class="c-sparkle" style="width:6px;height:6px;left:80%;top:25%;animation-duration:3.6s;animation-delay:1.8s"></div>
+      <div class="c-sparkle" style="width:3px;height:3px;left:10%;top:80%;animation-duration:5s;animation-delay:.2s"></div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="c-panel-r">
+      <div class="c-fabric-r"></div>
+      <div class="c-trim-r"></div>
+      <!-- Sparkles -->
+      <div class="c-sparkle" style="width:4px;height:4px;left:30%;top:40%;animation-duration:3.5s;animation-delay:.7s"></div>
+      <div class="c-sparkle" style="width:5px;height:5px;left:70%;top:60%;animation-duration:4.2s;animation-delay:1.4s"></div>
+      <div class="c-sparkle" style="width:3px;height:3px;left:55%;top:20%;animation-duration:2.9s;animation-delay:0s"></div>
+      <div class="c-sparkle" style="width:6px;height:6px;left:15%;top:75%;animation-duration:3.8s;animation-delay:2.1s"></div>
+      <div class="c-sparkle" style="width:4px;height:4px;left:85%;top:35%;animation-duration:4.6s;animation-delay:.9s"></div>
+    </div>
+
+    <!-- Pelmet / valance across the top -->
+    <div class="c-pelmet">
+      <div class="c-pelmet-arch">
+        <svg viewBox="0 0 800 30" width="100%" height="30" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0 Q200 30 400 30 Q600 30 800 0" fill="#6e0c0c" stroke="rgba(212,164,69,.5)" stroke-width="1"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Central emblem + prompt (sits above both panels) -->
+    <div class="c-emblem">
+      <!-- Decorative mandap arch SVG -->
+      <svg width="clamp(140px,22vw,220px)" height="clamp(50px,8vw,80px)" viewBox="0 0 220 80"
+           style="width:clamp(140px,22vw,220px);height:auto;margin-bottom:8px" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 70 Q10 10 110 10 Q210 10 210 70" stroke="rgba(212,164,69,.4)" stroke-width="1" fill="none"/>
+        <path d="M30 70 Q30 28 110 28 Q190 28 190 70" stroke="rgba(212,164,69,.25)" stroke-width=".8" fill="none"/>
+        <circle cx="10"  cy="70" r="3" fill="#d4a445" opacity=".7"/>
+        <circle cx="210" cy="70" r="3" fill="#d4a445" opacity=".7"/>
+        <circle cx="110" cy="10" r="4" fill="#f5d878" opacity=".8"/>
+        <path d="M85 68 Q90 56 110 52 Q130 56 135 68" stroke="rgba(212,164,69,.4)" stroke-width=".8" fill="none"/>
+        <circle cx="110" cy="52" r="2.5" fill="#d4a445" opacity=".8"/>
+      </svg>
+
+      <div class="c-ring">
+        <span class="c-heart">♥</span>
+      </div>
+
+      <p class="c-prompt">
+        ✦ Touch Anywhere to Begin ✦
+        <span class="c-prompt-sub">N &amp; P — a love story</span>
+      </p>
+    </div>
+
+  </div>
+  <!-- ══ END CURTAIN ══════════════════════════════ -->
 
   <canvas id="starfield"></canvas>
   <div class="vignette"></div>
@@ -853,9 +1077,37 @@
     }
     tick(); setInterval(tick, 1000);
 
-    // ── Floral corners ────────────────────────────────
-    setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6200);
-    setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6400);
+    // ── Curtain ───────────────────────────────────────
+    (function () {
+      const curtain = document.getElementById('curtain');
+      let opened = false;
+
+      function openCurtain() {
+        if (opened) return;
+        opened = true;
+
+        // Slide panels apart
+        curtain.classList.add('opening');
+
+        // After panels clear: start all main animations
+        setTimeout(() => {
+          document.body.classList.remove('curtain-on');
+          // Floral corners fire relative to reveal
+          setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6200);
+          setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6400);
+        }, 1000);
+
+        // Hide curtain after animation fully completes
+        setTimeout(() => curtain.classList.add('gone'), 2200);
+
+        // Start music
+        const audio = document.getElementById('bgAudio');
+        if (audio) audio.play().catch(() => {});
+      }
+
+      curtain.addEventListener('click',     openCurtain);
+      curtain.addEventListener('touchstart', openCurtain, { passive: true });
+    })();
 
     // ── Audio (runs after full DOM is ready) ──────────
     window.addEventListener('load', function () {
