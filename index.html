@@ -856,7 +856,143 @@
     // ── Floral corners ────────────────────────────────
     setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6200);
     setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6400);
+
+    // ── Audio (runs after full DOM is ready) ──────────
+    window.addEventListener('load', function () {
+      const audio = document.getElementById('bgAudio');
+      const musicBtn = document.getElementById('musicBtn');
+      const musicIcon = document.getElementById('musicIcon');
+      const tapHint = document.getElementById('tapHint');
+      let playing = false;
+
+      function onPlaying() {
+        playing = true;
+        musicBtn.classList.add('playing');
+        musicIcon.textContent = '♪';
+        tapHint.style.opacity = '0';
+        setTimeout(() => tapHint.style.display = 'none', 600);
+      }
+
+      function tryPlay() {
+        audio.play().then(onPlaying)
+          .catch(() => {
+            // Autoplay blocked — wait for first tap
+            tapHint.style.display = 'flex';
+            setTimeout(() => tapHint.style.opacity = '1', 50);
+            document.addEventListener('click', function onFirst(e) {
+              if (e.target === musicBtn) return;
+              audio.play().then(onPlaying).catch(() => {});
+              document.removeEventListener('click', onFirst);
+            }, { once: true });
+          });
+      }
+
+      musicBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (playing) {
+          audio.pause();
+          playing = false;
+          musicBtn.classList.remove('playing');
+          musicIcon.textContent = '♩';
+        } else {
+          audio.play().then(onPlaying).catch(() => {});
+        }
+      });
+
+      // Attempt autoplay immediately
+      tryPlay();
+    });
   </script>
+<!-- Audio -->
+<audio id="bgAudio" src="music.mp3" loop autoplay preload="auto"></audio>
+
+<!-- Tap hint -->
+<div id="tapHint">
+  <span>♫ tap anywhere to begin ♫</span>
+</div>
+
+<!-- Music toggle button -->
+<button id="musicBtn" aria-label="Toggle music" title="Toggle music">
+  <span id="musicIcon">♩</span>
+</button>
+
+<style>
+  #tapHint {
+    display: none;
+    opacity: 0;
+    position: fixed;
+    bottom: clamp(80px,12vw,110px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    color: rgba(212,164,69,.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: clamp(10px,1.2vw,13px);
+    font-weight: 200;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: opacity .6s ease;
+    animation: hintPulse 2s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  @keyframes hintPulse {
+    0%,100% { opacity: .5; }
+    50%      { opacity: 1; }
+  }
+  #musicBtn {
+
+    position: fixed;
+    bottom: clamp(20px,4vw,36px);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,164,69,.5);
+    background: rgba(7,4,14,.7);
+    backdrop-filter: blur(12px);
+    color: #d4a445;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .3s, transform .3s;
+    outline: none;
+  }
+  #musicBtn:hover { border-color: #d4a445; transform: translateX(-50%) scale(1.1); }
+  #musicBtn.playing { border-color: #f5d878; }
+  #musicBtn.playing::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,164,69,.35);
+    animation: ringPulse 1.8s ease-out infinite;
+  }
+  #musicBtn.playing::after {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,164,69,.15);
+    animation: ringPulse 1.8s .4s ease-out infinite;
+  }
+  @keyframes ringPulse {
+    0%   { transform: scale(1);   opacity: 1; }
+    100% { transform: scale(1.5); opacity: 0; }
+  }
+  #musicIcon {
+    display: block;
+    transition: transform .3s;
+  }
+  #musicBtn.playing #musicIcon {
+    animation: noteBounce 1s ease-in-out infinite alternate;
+  }
+  @keyframes noteBounce {
+    from { transform: translateY(0) rotate(-5deg); }
+    to   { transform: translateY(-3px) rotate(5deg); }
+  }
+</style>
 </body>
 
 </html>
