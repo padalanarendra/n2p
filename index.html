@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>N meets P — Forever Begins</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@200;300&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      user-select: none;
+      background: #07040e
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative
+    }
+
+    #starfield {
+      position: fixed;
+      inset: 0;
+      z-index: 0
+    }
+
+    .vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(7, 4, 14, .9) 100%);
+      z-index: 1;
+      pointer-events: none
+    }
+
+    .center-glow {
+      position: fixed;
+      width: min(70vw, 700px);
+      height: min(70vw, 700px);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 164, 69, .08) 0%, transparent 65%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      z-index: 1;
+      pointer-events: none;
+      animation: cpulse 6s ease-in-out infinite
+    }
+
+    @keyframes cpulse {
+
+      0%,
+      100% {
+        opacity: .7;
+        transform: translate(-50%, -52%) scale(1)
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-50%, -52%) scale(1.1)
+      }
+    }
+
+    /* petals */
+    .petals {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 2
+    }
+
+    .petal {
+      position: absolute;
+      top: -60px;
+      opacity: 0;
+      animation: petalFall linear infinite
+    }
+
+    @keyframes petalFall {
+      0% {
+        transform: translateY(0) rotate(0deg) translateX(0);
+        opacity: 0
+      }
+
+      5% {
+        opacity: .65
+      }
+
+      90% {
+        opacity: .4
+      }
+
+      100% {
+        transform: translateY(110vh) rotate(600deg) translateX(50px);
+        opacity: 0
+      }
+    }
+
+    /* butterflies */
+    .butterfly {
+      position: fixed;
+      pointer-events: none;
+      z-index: 3
+    }
+
+    .bfly-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(10px);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glowpulse 1.8s ease-in-out infinite
+    }
+
+    @keyframes glowpulse {
+
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(.9);
+        opacity: .5
+      }
+
+      50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: .9
+      }
+    }
+
+    .bfly-wings {
+      position: relative;
+      z-index: 1;
+      animation: wingflap .5s ease-in-out infinite
+    }
+
+    @keyframes wingflap {
+
+      0%,
+      100% {
+        transform: rotate(0deg)
+      }
+
+      25% {
+        transform: rotate(7deg)
+      }
+
+      75% {
+        transform: rotate(-7deg)
+      }
+    }
+
+    /* floral */
+    .floral-tl,
+    .floral-br {
+      position: fixed;
+      pointer-events: none;
+      z-index: 5;
+      opacity: 0
+    }
+
+    .floral-tl {
+      top: clamp(16px, 3vw, 36px);
+      left: clamp(16px, 3vw, 36px)
+    }
+
+    .floral-br {
+      bottom: clamp(16px, 3vw, 36px);
+      right: clamp(16px, 3vw, 36px);
+      transform: rotate(180deg)
+    }
+
+    .floral-tl.show {
+      animation: floralIn 1.2s ease forwards
+    }
+
+    .floral-br.show {
+      animation: floralInR 1.2s ease forwards
+    }
+
+    @keyframes floralIn {
+      from {
+        opacity: 0;
+        transform: scale(.4)
+      }
+
+      to {
+        opacity: .55;
+        transform: scale(1)
+      }
+    }
+
+    @keyframes floralInR {
+      from {
+        opacity: 0;
+        transform: rotate(180deg) scale(.4)
+      }
+
+      to {
+        opacity: .55;
+        transform: rotate(180deg) scale(1)
+      }
+    }
+
+    /* main */
+    .main {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      perspective: 1600px
+    }
+
+    /* NP row */
+    .nmp-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1
+    }
+
+    .letter-wrap-n {
+      display: inline-block;
+      transform-origin: left center;
+      opacity: 0;
+      animation: enterN 1.9s .4s cubic-bezier(.16, 1, .3, 1) forwards
+    }
+
+    .letter-wrap-p {
+      display: inline-block;
+      transform-origin: right center;
+      opacity: 0;
+      animation: enterP 1.9s 3.1s cubic-bezier(.16, 1, .3, 1) forwards
+    }
+
+    @keyframes enterN {
+      0% {
+        opacity: 0;
+        transform: translateX(-55vw) scale(6) rotateY(-25deg);
+        filter: blur(24px)
+      }
+
+      55% {
+        opacity: 1;
+        filter: blur(0)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotateY(0);
+        filter: blur(0)
+      }
+    }
+
+    @keyframes enterP {
+      0% {
+        opacity: 0;
+        transform: translateX(55vw) scale(6) rotateY(25deg);
+        filter: blur(24px)
+      }
+
+      55% {
+        opacity: 1;
+        filter: blur(0)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0) scale(1) rotateY(0);
+        filter: blur(0)
+      }
+    }
+
+    .letter-n,
+    .letter-p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(110px, 18vw, 240px);
+      font-weight: 600;
+      letter-spacing: -.03em;
+      display: block;
+      background: linear-gradient(135deg, #c8a855 0%, #f5d878 28%, #fff5c0 50%, #d4a445 72%, #c8a855 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 28px rgba(212, 164, 69, .45));
+      animation: goldShimmer 5s ease infinite
+    }
+
+    @keyframes goldShimmer {
+      0% {
+        background-position: 0% 50%
+      }
+
+      50% {
+        background-position: 100% 50%
+      }
+
+      100% {
+        background-position: 0% 50%
+      }
+    }
+
+    /* meets */
+    .meets-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 clamp(14px, 2.5vw, 48px);
+      padding-top: .38em;
+      opacity: 0;
+      animation: meetsIn 1.2s 2.1s cubic-bezier(.34, 1.3, .64, 1) forwards
+    }
+
+    @keyframes meetsIn {
+      from {
+        opacity: 0;
+        transform: translateY(28px) scale(.82)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .meets-orn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 5px
+    }
+
+    .meets-orn.bot {
+      margin-bottom: 0;
+      margin-top: 5px
+    }
+
+    .orn-line {
+      width: clamp(22px, 3vw, 46px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, #d4a445);
+      transform: scaleX(0);
+      transform-origin: left
+    }
+
+    .orn-line.r {
+      background: linear-gradient(to left, transparent, #d4a445);
+      transform-origin: right
+    }
+
+    .orn-line.show {
+      animation: lineGrow .8s 2.5s ease forwards
+    }
+
+    @keyframes lineGrow {
+      to {
+        transform: scaleX(1)
+      }
+    }
+
+    .orn-diamond {
+      width: 5px;
+      height: 5px;
+      background: #d4a445;
+      transform: rotate(45deg);
+      opacity: 0;
+      animation: fadein .5s 2.8s ease forwards
+    }
+
+    @keyframes fadein {
+      to {
+        opacity: 1
+      }
+    }
+
+    .meets-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(10px, 1.4vw, 18px);
+      font-weight: 200;
+      color: #d4a445;
+      letter-spacing: .4em;
+      text-transform: uppercase
+    }
+
+    .meets-heart {
+      font-size: clamp(12px, 1.4vw, 18px);
+      color: #e05070;
+      margin-top: 3px;
+      opacity: 0;
+      animation: heartPulse 1.5s 5.4s ease infinite
+    }
+
+    @keyframes heartPulse {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .8
+      }
+
+      50% {
+        transform: scale(1.35);
+        opacity: 1
+      }
+    }
+
+    /* ornament divider */
+    .divider-orn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+      opacity: 0;
+      animation: fadeUp .9s 5.0s ease forwards
+    }
+
+    .div-line {
+      width: clamp(70px, 13vw, 190px);
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212, 164, 69, .6), transparent)
+    }
+
+    .div-gems {
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .gem-sm {
+      width: 4px;
+      height: 4px;
+      background: #d4a445;
+      transform: rotate(45deg)
+    }
+
+    .gem-lg {
+      width: 8px;
+      height: 8px;
+      background: linear-gradient(135deg, #f5d878, #c8a855);
+      transform: rotate(45deg)
+    }
+
+    /* date */
+    .date-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 1.9vw, 24px);
+      color: #c8a855;
+      letter-spacing: .12em;
+      margin-top: 14px;
+      opacity: 0;
+      animation: fadeUp 1s 5.3s ease forwards
+    }
+
+    /* subtitle */
+    .subtitle {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(8px, 1vw, 11px);
+      font-weight: 200;
+      color: rgba(255, 230, 190, .4);
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      margin-top: 6px;
+      opacity: 0;
+      animation: fadeUp 1s 5.6s ease forwards
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(16px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    /* countdown */
+    .countdown {
+      display: flex;
+      gap: clamp(10px, 1.8vw, 20px);
+      margin-top: clamp(24px, 4vw, 48px);
+      opacity: 0;
+      animation: fadeUp 1s 6.0s ease forwards
+    }
+
+    .cd-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center
+    }
+
+    .cd-card {
+      position: relative;
+      padding: clamp(10px, 1.4vw, 18px) clamp(14px, 2vw, 28px);
+      min-width: clamp(62px, 9vw, 96px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .03);
+      backdrop-filter: blur(20px);
+      cursor: default;
+      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1)
+    }
+
+    .cd-card:hover {
+      transform: scale(1.07) translateY(-3px)
+    }
+
+    .cd-card::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 17px;
+      background: linear-gradient(135deg, #f5d878, #c8a855, #6b4f10, #c8a855, #f5d878);
+      z-index: -1
+    }
+
+    .cd-card::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 15px;
+      background: rgba(7, 4, 14, .85);
+      z-index: 0
+    }
+
+    .cd-card:hover::before {
+      background: linear-gradient(135deg, #fff5c0, #d4a445, #8b6914, #d4a445, #fff5c0)
+    }
+
+    .cd-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4.5vw, 52px);
+      font-weight: 600;
+      color: #f5d878;
+      line-height: 1;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 22px rgba(212, 164, 69, .5)
+    }
+
+    .cd-value.flip {
+      animation: cdflip .35s ease
+    }
+
+    @keyframes cdflip {
+      0% {
+        opacity: 0;
+        transform: translateY(-9px) scale(.88)
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .cd-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(7px, .9vw, 10px);
+      font-weight: 200;
+      color: rgba(212, 164, 69, .55);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      margin-top: 8px
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="starfield"></canvas>
+  <div class="vignette"></div>
+  <div class="center-glow"></div>
+  <div class="petals" id="petals"></div>
+  <div id="butterflies"></div>
+
+  <!-- Floral SVG corners -->
+  <div class="floral-tl" id="floralTL">
+    <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+      <path d="M5 5 Q5 48 48 48" stroke="#d4a445" stroke-width=".9" fill="none" />
+      <path d="M5 5 Q48 5 48 48" stroke="#d4a445" stroke-width=".9" fill="none" />
+      <circle cx="5" cy="5" r="2.5" fill="#d4a445" />
+      <circle cx="48" cy="48" r="1.6" fill="#d4a445" opacity=".6" />
+      <path d="M14 5 Q11 19 25 16" stroke="#d4a445" stroke-width=".7" fill="none" opacity=".8" />
+      <circle cx="25" cy="16" r="1.5" fill="#d4a445" opacity=".8" />
+      <path d="M5 14 Q19 11 16 25" stroke="#d4a445" stroke-width=".7" fill="none" opacity=".8" />
+      <circle cx="16" cy="25" r="1.5" fill="#d4a445" opacity=".8" />
+      <path d="M22 5 Q20 12 27 11" stroke="#d4a445" stroke-width=".55" fill="none" opacity=".5" />
+      <path d="M5 22 Q12 20 11 27" stroke="#d4a445" stroke-width=".55" fill="none" opacity=".5" />
+    </svg>
+  </div>
+  <div class="floral-br" id="floralBR">
+    <svg width="90" height="90" viewBox="0 0 90 90" fill="none">
+      <path d="M5 5 Q5 48 48 48" stroke="#d4a445" stroke-width=".9" fill="none" />
+      <path d="M5 5 Q48 5 48 48" stroke="#d4a445" stroke-width=".9" fill="none" />
+      <circle cx="5" cy="5" r="2.5" fill="#d4a445" />
+      <circle cx="48" cy="48" r="1.6" fill="#d4a445" opacity=".6" />
+      <path d="M14 5 Q11 19 25 16" stroke="#d4a445" stroke-width=".7" fill="none" opacity=".8" />
+      <circle cx="25" cy="16" r="1.5" fill="#d4a445" opacity=".8" />
+      <path d="M5 14 Q19 11 16 25" stroke="#d4a445" stroke-width=".7" fill="none" opacity=".8" />
+      <circle cx="16" cy="25" r="1.5" fill="#d4a445" opacity=".8" />
+    </svg>
+  </div>
+
+  <div class="main">
+    <div class="nmp-row">
+      <div class="letter-wrap-n"><span class="letter-n">N</span></div>
+
+      <div class="meets-wrap">
+        <div class="meets-orn">
+          <div class="orn-line show"></div>
+          <div class="orn-diamond"></div>
+          <div class="orn-line r show"></div>
+        </div>
+        <span class="meets-text">meets</span>
+        <div class="meets-orn bot">
+          <div class="orn-line show"></div>
+          <div class="orn-diamond"></div>
+          <div class="orn-line r show"></div>
+        </div>
+        <div class="meets-heart">♥</div>
+      </div>
+
+      <div class="letter-wrap-p"><span class="letter-p">P</span></div>
+    </div>
+
+    <div class="divider-orn">
+      <div class="div-line"></div>
+      <div class="div-gems">
+        <div class="gem-sm"></div>
+        <div class="gem-lg"></div>
+        <div class="gem-sm"></div>
+      </div>
+      <div class="div-line"></div>
+    </div>
+
+    <!-- <p class="date-text">26 · August · 2026</p>
+  <p class="subtitle">forever begins here</p> -->
+    <p class="date-text">Site is under construction — just like us. Perfectly.</p>
+    <p class="subtitle">See you soon</p>
+  </div>
+
+  <div class="countdown" id="countdown">
+    <div class="cd-item">
+      <div class="cd-card"><span class="cd-value" id="cd-days">00</span></div><span class="cd-label">Days</span>
+    </div>
+    <div class="cd-item">
+      <div class="cd-card"><span class="cd-value" id="cd-hours">00</span></div><span class="cd-label">Hours</span>
+    </div>
+    <div class="cd-item">
+      <div class="cd-card"><span class="cd-value" id="cd-mins">00</span></div><span class="cd-label">Mins</span>
+    </div>
+    <div class="cd-item">
+      <div class="cd-card"><span class="cd-value" id="cd-secs">00</span></div><span class="cd-label">Secs</span>
+    </div>
+  </div>
+
+  <script>
+    // ── Starfield ──────────────────────────────────────
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let W, H, stars = [], shooters = [];
+
+    function resize() {
+      W = canvas.width = innerWidth;
+      H = canvas.height = innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', () => { resize(); initStars(); });
+
+    function initStars() {
+      stars = Array.from({ length: 220 }, () => ({
+        x: Math.random() * W, y: Math.random() * H,
+        r: Math.random() * 1.4 + .2,
+        a: Math.random(),
+        speed: Math.random() * .006 + .002,
+        phase: Math.random() * Math.PI * 2,
+        gold: Math.random() < .15
+      }));
+    }
+    initStars();
+
+    function spawnShooter() {
+      shooters.push({
+        x: Math.random() * W * .6, y: Math.random() * H * .4,
+        vx: 4 + Math.random() * 3, vy: 2 + Math.random() * 2,
+        life: 1, len: 80 + Math.random() * 60
+      });
+    }
+    setInterval(spawnShooter, 4000);
+
+    function drawStars(t) {
+      ctx.clearRect(0, 0, W, H);
+      stars.forEach(s => {
+        const a = s.a * (.5 + .5 * Math.sin(t * s.speed + s.phase));
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = s.gold
+          ? `rgba(212,164,69,${a})`
+          : `rgba(255,240,220,${a})`;
+        ctx.fill();
+      });
+      shooters = shooters.filter(s => s.life > 0);
+      shooters.forEach(s => {
+        ctx.beginPath();
+        ctx.moveTo(s.x, s.y);
+        ctx.lineTo(s.x - s.vx * s.len * .1, s.y - s.vy * s.len * .1);
+        const grad = ctx.createLinearGradient(s.x - s.vx * 6, s.y - s.vy * 6, s.x, s.y);
+        grad.addColorStop(0, 'rgba(245,216,120,0)');
+        grad.addColorStop(1, `rgba(245,216,120,${s.life * .8})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+        s.x += s.vx; s.y += s.vy; s.life -= .018;
+      });
+    }
+
+    let animT = 0;
+    (function loop() { animT += .5; drawStars(animT); requestAnimationFrame(loop); })();
+
+    // ── Rose Petals ────────────────────────────────────
+    const petalColors = ['rgba(220,100,120,.6)', 'rgba(240,160,170,.55)', 'rgba(200,80,110,.5)', 'rgba(250,180,190,.5)'];
+    const PC = document.getElementById('petals');
+    for (let i = 0; i < 14; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const sz = 8 + Math.random() * 14;
+      p.style.cssText = `
+    left:${Math.random() * 100}%;
+    width:${sz}px; height:${sz * 1.3}px;
+    border-radius:50% 0 50% 0;
+    background:${petalColors[Math.floor(Math.random() * petalColors.length)]};
+    animation-duration:${9 + Math.random() * 14}s;
+    animation-delay:${Math.random() * 12}s;
+    filter:blur(.4px);
+  `;
+      PC.appendChild(p);
+    }
+
+    // ── Butterflies ────────────────────────────────────
+    const BCFG = [
+      { sx: -8, sy: 28, size: 50, dur: 22, delay: 0, yb: -100, cA: '#f472b6', cB: '#a855f7', cC: '#ec4899', glow: 'rgba(244,114,182,.7)' },
+      { sx: -5, sy: 60, size: 42, dur: 26, delay: 4, yb: 60, cA: '#c084fc', cB: '#818cf8', cC: '#a78bfa', glow: 'rgba(192,132,252,.7)' },
+      { sx: -9, sy: 18, size: 56, dur: 20, delay: 8, yb: -55, cA: '#fb923c', cB: '#f472b6', cC: '#fbbf24', glow: 'rgba(251,146,60,.7)' },
+      { sx: -6, sy: 72, size: 46, dur: 24, delay: 12, yb: 90, cA: '#34d399', cB: '#60a5fa', cC: '#a78bfa', glow: 'rgba(52,211,153,.7)' },
+      { sx: -4, sy: 44, size: 54, dur: 28, delay: 16, yb: -28, cA: '#f9a8d4', cB: '#c084fc', cC: '#93c5fd', glow: 'rgba(249,168,212,.8)' },
+    ];
+    const BC = document.getElementById('butterflies');
+    let uid = 0;
+    BCFG.forEach(c => {
+      uid++;
+      const id = uid;
+      const el = document.createElement('div');
+      el.className = 'butterfly';
+      el.style.cssText = `left:${c.sx}%;top:calc(${c.sy}% + ${c.yb}px)`;
+      const g1 = `wl${id}`, g2 = `wr${id}`, sh = `sh${id}`, gf = `gf${id}`;
+      const gs = c.size * 2.2;
+      el.innerHTML = `
+    <div class="bfly-glow" style="width:${gs}px;height:${gs}px;background:radial-gradient(circle,${c.glow} 0%,transparent 70%)"></div>
+    <div class="bfly-wings">
+      <svg width="${c.size}" height="${c.size * 1.1}" viewBox="0 0 80 88" fill="none"
+           style="filter:drop-shadow(0 0 8px ${c.glow}) drop-shadow(0 0 18px ${c.glow})">
+        <defs>
+          <radialGradient id="${g1}" cx="35%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="${c.cC}"/><stop offset="50%" stop-color="${c.cA}" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="${c.cB}" stop-opacity=".4"/>
+          </radialGradient>
+          <radialGradient id="${g2}" cx="65%" cy="45%" r="60%">
+            <stop offset="0%" stop-color="${c.cC}"/><stop offset="50%" stop-color="${c.cB}" stop-opacity=".9"/>
+            <stop offset="100%" stop-color="${c.cA}" stop-opacity=".4"/>
+          </radialGradient>
+          <radialGradient id="${sh}" cx="30%" cy="30%" r="50%">
+            <stop offset="0%" stop-color="white" stop-opacity=".5"/>
+            <stop offset="100%" stop-color="white" stop-opacity="0"/>
+          </radialGradient>
+          <filter id="${gf}" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="2.5" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+        <g filter="url(#${gf})">
+          <path d="M40 44 Q22 30 10 16 Q4 8 12 6 Q24 4 36 22 Q40 32 40 44Z" fill="url(#${g1})"/>
+          <path d="M40 44 Q22 30 10 16 Q4 8 12 6 Q24 4 36 22 Q40 32 40 44Z" fill="url(#${sh})" opacity=".5"/>
+          <path d="M40 44 Q18 50 10 62 Q6 72 14 74 Q26 76 38 60 Q40 52 40 44Z" fill="url(#${g1})" opacity=".85"/>
+          <path d="M40 44 Q58 30 70 16 Q76 8 68 6 Q56 4 44 22 Q40 32 40 44Z" fill="url(#${g2})"/>
+          <path d="M40 44 Q58 30 70 16 Q76 8 68 6 Q56 4 44 22 Q40 32 40 44Z" fill="url(#${sh})" opacity=".5"/>
+          <path d="M40 44 Q62 50 70 62 Q74 72 66 74 Q54 76 42 60 Q40 52 40 44Z" fill="url(#${g2})" opacity=".85"/>
+        </g>
+        <ellipse cx="40" cy="44" rx="2.8" ry="19" fill="#1a0830" opacity=".9"/>
+        <ellipse cx="39" cy="38" rx="1.1" ry="4.5" fill="white" opacity=".3"/>
+        <path d="M39 28 Q33 17 30 10" stroke="#1a0830" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+        <path d="M41 28 Q47 17 50 10" stroke="#1a0830" stroke-width="1.3" stroke-linecap="round" opacity=".8"/>
+        <circle cx="30" cy="10" r="2.2" fill="${c.cA}"/>
+        <circle cx="50" cy="10" r="2.2" fill="${c.cB}"/>
+      </svg>
+    </div>`;
+      BC.appendChild(el);
+      el.animate([
+        { offset: 0, transform: 'translateX(0) translateY(0)', opacity: 0 },
+        { offset: .05, transform: 'translateX(14vw) translateY(-70px)', opacity: .9 },
+        { offset: .3, transform: 'translateX(38vw) translateY(50px)', opacity: 1 },
+        { offset: .6, transform: 'translateX(63vw) translateY(-90px)', opacity: 1 },
+        { offset: .85, transform: 'translateX(88vw) translateY(30px)', opacity: .9 },
+        { offset: 1, transform: 'translateX(115vw) translateY(-20px)', opacity: 0 },
+      ], { duration: c.dur * 1000, delay: c.delay * 1000, iterations: Infinity, easing: 'ease-in-out' });
+    });
+
+    // ── Countdown ─────────────────────────────────────
+    const TARGET = new Date('2026-08-26T00:00:00').getTime();
+    const pad = n => String(n).padStart(2, '0');
+    function set(id, v) {
+      const el = document.getElementById(id);
+      const s = pad(v);
+      if (el.textContent !== s) {
+        el.textContent = s;
+        el.classList.remove('flip');
+        void el.offsetWidth;
+        el.classList.add('flip');
+      }
+    }
+    function tick() {
+      const d = TARGET - Date.now();
+      if (d <= 0) return;
+      set('cd-days', Math.floor(d / 86400000));
+      set('cd-hours', Math.floor((d % 86400000) / 3600000));
+      set('cd-mins', Math.floor((d % 3600000) / 60000));
+      set('cd-secs', Math.floor((d % 60000) / 1000));
+    }
+    tick(); setInterval(tick, 1000);
+
+    // ── Floral corners ────────────────────────────────
+    setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6200);
+    setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6400);
+  </script>
+</body>
+
+</html>
