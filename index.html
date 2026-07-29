@@ -556,11 +556,13 @@
       min-height: 100vh;
       width: 100%;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 16px;
+      padding: 24px 16px 20px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
+      position: relative;
     }
 
     .std-card {
@@ -864,23 +866,25 @@
        Slide 3: Meet the Couple Section
     ══════════════════════════════════════ */
     .meet-couple-section {
+      height: 100vh;
       min-height: 100vh;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 30px 16px 40px;
+      padding: 12px 14px 16px;
       scroll-snap-align: start;
       scroll-snap-stop: always;
       position: relative;
+      overflow: hidden;
     }
 
     .meet-couple-card {
       width: 100%;
-      max-width: 440px;
-      padding: clamp(18px, 3vw, 26px) clamp(16px, 3vw, 24px);
-      border-radius: 28px;
+      max-width: 420px;
+      padding: clamp(12px, 2vw, 18px) clamp(12px, 2vw, 18px);
+      border-radius: 24px;
       background: linear-gradient(180deg, rgba(20, 12, 34, 0.75) 0%, rgba(10, 5, 20, 0.88) 100%);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
@@ -1034,10 +1038,10 @@
     .couple-photo-container {
       position: relative;
       width: 100%;
-      max-width: 250px;
-      height: 200px;
-      margin: 0 auto 8px;
-      border-radius: 22px;
+      max-width: 230px;
+      height: 175px;
+      margin: 0 auto 6px;
+      border-radius: 18px;
       border: 1.5px solid rgba(212, 164, 69, 0.65);
       box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 164, 69, 0.25);
       overflow: hidden;
@@ -1285,10 +1289,11 @@
       letter-spacing: 0.05em;
     }
 
-    .couple-section-scroll {
+    .couple-section-scroll,
+    .std-section-scroll {
       position: relative;
       bottom: auto;
-      margin-top: 14px;
+      margin-top: 8px;
       opacity: 1;
       animation: fadeUp 1s 0.5s ease forwards;
       z-index: 10;
@@ -1863,6 +1868,17 @@
           <div class="inv-line"></div>
         </div>
       </div>
+
+      <!-- Bouncing Scroll Down Indicator to Meet the Couple -->
+      <a href="#meet-couple" class="scroll-indicator std-section-scroll" aria-label="Scroll down to Meet the Couple">
+        <span class="scroll-text">Scroll Down</span>
+        <div class="scroll-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </div>
+      </a>
     </section>
 
     <!-- Slide 3: Meet the Couple Section -->
@@ -2224,16 +2240,15 @@
 
             <!-- Screen 3 — Our Journey Together -->
             <div class="couple-slide" data-slide="2">
-              <div class="couple-photo-container" style="height: 300px;">
+              <div class="couple-photo-container">
                 <img src="photos/deloitte.jpeg" alt="Our Journey Together" loading="lazy" />
               </div>
 
               <h4 class="couple-script-title">🌿 Together 🌿</h4>
-              <div class="couple-mini-heart">♡</div>
 
               <div class="journey-content-block">
                 <p class="journey-para">
-                  Met at <span style="color: #fff5c0;">Deloitte</span>
+                  We work at <span style="color: #fff5c0;">Deloitte</span>
                 </p>
                 <p class="journey-para" style="color: #fff5c0;">
                   Now entering a lifelong project with no rollback plan. </p>
