@@ -233,8 +233,8 @@
 
     /* Slide 1: Hero section */
     .hero-section {
-      height: 100vh;
-      min-height: 100vh;
+      height: 94vh;
+      min-height: 94vh;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -861,6 +861,440 @@
     }
 
     /* ══════════════════════════════════════
+       Slide 3: Meet the Couple Section
+    ══════════════════════════════════════ */
+    .meet-couple-section {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 16px 40px;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+    }
+
+    .meet-couple-card {
+      width: 100%;
+      max-width: 440px;
+      padding: clamp(18px, 3vw, 26px) clamp(16px, 3vw, 24px);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(20, 12, 34, 0.75) 0%, rgba(10, 5, 20, 0.88) 100%);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(212, 164, 69, 0.4);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), inset 0 0 35px rgba(212, 164, 69, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.8s cubic-bezier(.16, 1, .3, 1), opacity 0.8s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .meet-couple-card.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .couple-top-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .couple-title-main {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(10px, 1.2vw, 12px);
+      font-weight: 300;
+      color: #d4a445;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .couple-ornament-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #d4a445;
+      font-size: 10px;
+    }
+
+    .couple-orn-dash {
+      width: 28px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4a445, transparent);
+    }
+
+    /* Icon Navigation Tabs */
+    .couple-nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: clamp(14px, 3.5vw, 24px);
+      margin-bottom: 16px;
+      width: 100%;
+    }
+
+    .couple-nav-tab {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 0;
+    }
+
+    .couple-tab-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 164, 69, 0.35);
+      background: rgba(14, 7, 26, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(212, 164, 69, 0.65);
+      transition: all 0.3s ease;
+    }
+
+    .couple-nav-tab:hover .couple-tab-icon-wrap {
+      border-color: rgba(245, 216, 120, 0.7);
+      color: #f5d878;
+      box-shadow: 0 0 12px rgba(212, 164, 69, 0.4);
+    }
+
+    .couple-nav-tab.active .couple-tab-icon-wrap {
+      border: 1.5px solid #f5d878;
+      background: radial-gradient(circle, rgba(245, 216, 120, 0.25) 0%, rgba(212, 164, 69, 0.1) 70%);
+      color: #fff5c0;
+      box-shadow: 0 0 16px rgba(245, 216, 120, 0.6), inset 0 0 8px rgba(245, 216, 120, 0.3);
+      transform: scale(1.08);
+    }
+
+    .couple-tab-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(10px, 1.1vw, 12px);
+      font-weight: 300;
+      color: rgba(212, 164, 69, 0.65);
+      transition: all 0.3s ease;
+    }
+
+    .couple-nav-tab.active .couple-tab-label {
+      color: #ffffff;
+      font-weight: 500;
+      text-shadow: 0 0 8px rgba(245, 216, 120, 0.5);
+    }
+
+    /* Slider & Photo Box */
+    .couple-slider-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      touch-action: pan-y;
+      min-height: 440px;
+    }
+
+    .couple-slides {
+      display: flex;
+      width: 100%;
+      transition: transform 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .couple-slide {
+      min-width: 100%;
+      width: 100%;
+      flex-shrink: 0;
+      padding: 0 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      opacity: 0.3;
+      transform: scale(0.96);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .couple-slide.active {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .couple-photo-container {
+      position: relative;
+      width: 100%;
+      max-width: 270px;
+      height: 240px;
+      margin: 0 auto 12px;
+      border-radius: 22px;
+      border: 1.5px solid rgba(212, 164, 69, 0.65);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 164, 69, 0.25);
+      overflow: hidden;
+    }
+
+    .couple-photo-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+
+    .photo-leaf-accent {
+      position: absolute;
+      bottom: -4px;
+      right: -4px;
+      pointer-events: none;
+      z-index: 5;
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.7));
+    }
+
+    .couple-script-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(17px, 2.2vw, 21px);
+      color: #d4a445;
+      margin-bottom: 0px;
+    }
+
+    .couple-main-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(30px, 4.5vw, 38px);
+      font-weight: 600;
+      color: #fff5c0;
+      letter-spacing: 0.02em;
+      text-shadow: 0 0 16px rgba(245, 216, 120, 0.4);
+      margin: 0 0 2px;
+    }
+
+    .couple-mini-heart {
+      font-size: 13px;
+      color: #e05070;
+      margin-bottom: 8px;
+    }
+
+    .couple-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 164, 69, 0.35);
+      background: rgba(14, 7, 26, 0.6);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255, 245, 200, 0.85);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .couple-parents-block {
+      margin-bottom: 12px;
+    }
+
+    .couple-parents-header {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: #d4a445;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .couple-parents-names-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: rgba(255, 245, 220, 0.95);
+      line-height: 1.45;
+      font-weight: 400;
+    }
+
+    .couple-bio-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(14, 7, 26, 0.45);
+      border: 1px solid rgba(212, 164, 69, 0.2);
+      border-radius: 16px;
+      padding: 10px 14px;
+      margin-top: 4px;
+      max-width: 320px;
+      text-align: left;
+    }
+
+    .couple-bio-avatar {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 164, 69, 0.4);
+      background: rgba(212, 164, 69, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f5d878;
+    }
+
+    .couple-bio-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: rgba(255, 235, 200, 0.85);
+      line-height: 1.4;
+    }
+
+    /* Journey Content */
+    .journey-content-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 8px;
+    }
+
+    .journey-para {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 15px;
+      color: rgba(255, 245, 220, 0.9);
+      line-height: 1.5;
+      font-style: italic;
+      max-width: 300px;
+    }
+
+    .journey-highlight {
+      color: #f5d878;
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .city-skyline-wrap {
+      width: 100%;
+      margin-top: 10px;
+      opacity: 0.75;
+    }
+
+    .village-backdrop-wrap {
+      width: 100%;
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    .village-backdrop {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Footer Controls */
+    .couple-card-footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(212, 164, 69, 0.15);
+    }
+
+    .couple-nav-btn {
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(212, 164, 69, 0.85);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .couple-nav-btn:hover {
+      color: #f5d878;
+    }
+
+    .couple-continue-btn {
+      background: linear-gradient(135deg, #d4a445 0%, #f5d878 100%);
+      color: #07040e;
+      font-weight: 600;
+      padding: 6px 18px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(245, 216, 120, 0.4);
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .couple-continue-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(245, 216, 120, 0.7);
+    }
+
+    .couple-dots-middle {
+      display: flex;
+      gap: 6px;
+    }
+
+    .couple-dot-item {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(212, 164, 69, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .couple-dot-item.active {
+      width: 18px;
+      border-radius: 10px;
+      background: #f5d878;
+      box-shadow: 0 0 8px rgba(245, 216, 120, 0.6);
+    }
+
+    /* Bottom Quote Banner */
+    .couple-bottom-quote-banner {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .couple-quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: rgba(212, 164, 69, 0.85);
+      letter-spacing: 0.05em;
+    }
+
+    .couple-section-scroll {
+      position: relative;
+      bottom: auto;
+      margin-top: 14px;
+      opacity: 1;
+      animation: fadeUp 1s 0.5s ease forwards;
+      z-index: 10;
+    }
+
+    /* ══════════════════════════════════════
        CURTAIN — pause all main animations
     ══════════════════════════════════════ */
     body.curtain-on .ganesha-symbol,
@@ -1431,7 +1865,434 @@
       </div>
     </section>
 
-    <!-- Slide 3: Our Story -->
+    <!-- Slide 3: Meet the Couple Section -->
+    <section class="meet-couple-section" id="meet-couple">
+      <div class="meet-couple-card">
+        <!-- Main Section Top Header -->
+        <div class="couple-top-header">
+          <span class="couple-title-main">MEET THE COUPLE</span>
+          <div class="couple-ornament-line">
+            <span class="couple-orn-dash"></span>
+            <span>♡</span>
+            <span class="couple-orn-dash"></span>
+          </div>
+        </div>
+
+        <!-- Top Icon Navigation Tabs -->
+        <div class="couple-nav-tabs" role="tablist">
+          <button class="couple-nav-tab active" data-index="0" role="tab" aria-selected="true">
+            <div class="couple-tab-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M12 11v3" />
+              </svg>
+            </div>
+            <span class="couple-tab-label">The Groom</span>
+          </button>
+          <button class="couple-nav-tab" data-index="1" role="tab" aria-selected="false">
+            <div class="couple-tab-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M4 21v-2a4 4 0 0 1 3-3.87" />
+                <circle cx="12" cy="7" r="4" />
+                <path d="M9 3h6" />
+              </svg>
+            </div>
+            <span class="couple-tab-label">The Bride</span>
+          </button>
+          <button class="couple-nav-tab" data-index="2" role="tab" aria-selected="false">
+            <div class="couple-tab-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+              </svg>
+            </div>
+            <span class="couple-tab-label">Together</span>
+          </button>
+        </div>
+
+        <!-- Swipeable Screen Slider Container -->
+        <div class="couple-slider-wrapper" id="coupleSlider">
+          <div class="couple-slides" id="coupleSlides">
+
+            <!-- Screen 1 — About the Groom -->
+            <div class="couple-slide active" data-slide="0">
+              <div class="couple-photo-container">
+                <img src="photos/groom.JPG" alt="Narendra - Groom" loading="lazy" />
+              </div>
+
+              <h4 class="couple-script-title">The Groom</h4>
+              <h3 class="couple-main-name">Narendra</h3>
+              <div class="couple-mini-heart">♡</div>
+
+              <div class="couple-parents-block">
+                <div class="couple-parents-header">
+                  <span>🌾</span>
+                  <span>Beloved younger son of</span>
+                  <span>🌾</span>
+                </div>
+                <div class="couple-parents-names-text">
+                  Sri Padala Madhu Sudana Rao<br>
+                  &<br>
+                  Smt Padala Malati
+                </div>
+              </div>
+
+              <!-- Village Backdrop Illustration (Top Image Match) -->
+              <div class="village-backdrop-wrap">
+                <svg class="village-backdrop" viewBox="0 0 700 160" fill="none" width="100%">
+                  <!-- Moon & Stars -->
+                  <path d="M165 25 A 14 14 0 1 0 185 45 A 16 16 0 1 1 165 25 Z" fill="#f5d878" opacity="0.9"/>
+                  <circle cx="60" cy="18" r="1.2" fill="#f5d878"/>
+                  <circle cx="280" cy="20" r="1.5" fill="#f5d878"/>
+                  <circle cx="360" cy="15" r="1.2" fill="#f5d878"/>
+                  <circle cx="460" cy="22" r="1.5" fill="#f5d878"/>
+                  <circle cx="600" cy="16" r="1.2" fill="#f5d878"/>
+
+                  <!-- Sky Clouds -->
+                  <path d="M70 30 Q80 20 95 25 Q110 18 120 28 Q130 24 135 32 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+                  <path d="M520 28 Q535 18 555 24 Q570 15 585 26 Q600 22 610 32 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+
+                  <!-- Ground Line -->
+                  <line x1="15" y1="140" x2="685" y2="140" stroke="#f5d878" stroke-width="2"/>
+                  <line x1="15" y1="141" x2="685" y2="141" stroke="#f5d878" stroke-width="3" opacity="0.4" filter="blur(2px)"/>
+
+                  <!-- Left Palm Tree -->
+                  <path d="M75 140 Q65 95 55 60" stroke="#f5d878" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M55 60 Q35 45 25 50 M55 60 Q42 32 35 20 M55 60 Q65 32 72 22 M55 60 Q75 42 85 48" stroke="#f5d878" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M22 140 Q28 128 38 132 Q48 122 58 132 Q65 125 72 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- House 1 -->
+                  <path d="M95 140 L95 110 L120 92 L145 110 L145 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <rect x="122" y="118" width="10" height="22" stroke="#f5d878" stroke-width="1"/>
+                  <rect x="104" y="114" width="4" height="4" fill="#f5d878"/><rect x="110" y="114" width="4" height="4" fill="#f5d878"/>
+                  <rect x="104" y="120" width="4" height="4" fill="#f5d878"/><rect x="110" y="120" width="4" height="4" fill="#f5d878"/>
+
+                  <!-- Tree -->
+                  <path d="M172 140 L172 110" stroke="#f5d878" stroke-width="2"/>
+                  <circle cx="172" cy="85" r="22" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <path d="M172 107 Q162 95 162 82 M172 100 Q182 92 182 80" stroke="#f5d878" stroke-width="1"/>
+
+                  <path d="M198 140 Q205 130 215 132 Q225 125 235 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- House 2 -->
+                  <path d="M225 140 L225 90 L260 62 L295 90 L295 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.8"/>
+                  <rect x="253" y="105" width="14" height="35" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="254" y="74" width="4" height="4" fill="#f5d878"/><rect x="262" y="74" width="4" height="4" fill="#f5d878"/>
+                  <rect x="254" y="80" width="4" height="4" fill="#f5d878"/><rect x="262" y="80" width="4" height="4" fill="#f5d878"/>
+
+                  <!-- Center House -->
+                  <path d="M320 140 L320 80 L360 48 L400 80 L400 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="2"/>
+                  <rect x="352" y="102" width="16" height="38" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="354" y="62" width="5" height="5" fill="#f5d878"/><rect x="362" y="62" width="5" height="5" fill="#f5d878"/>
+                  <rect x="354" y="70" width="5" height="5" fill="#f5d878"/><rect x="362" y="70" width="5" height="5" fill="#f5d878"/>
+
+                  <!-- House 3 -->
+                  <path d="M425 140 L425 90 L460 62 L495 90 L495 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.8"/>
+                  <rect x="453" y="105" width="14" height="35" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="454" y="74" width="4" height="4" fill="#f5d878"/><rect x="462" y="74" width="4" height="4" fill="#f5d878"/>
+                  <rect x="454" y="80" width="4" height="4" fill="#f5d878"/><rect x="462" y="80" width="4" height="4" fill="#f5d878"/>
+
+                  <path d="M495 140 Q502 130 512 132 Q520 125 530 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- Thatched Hut -->
+                  <path d="M525 140 L525 105 L565 105 L565 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <path d="M515 105 Q545 80 575 105 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <circle cx="545" cy="85" r="2.5" fill="#f5d878"/>
+                  <rect x="540" y="118" width="10" height="22" stroke="#f5d878" stroke-width="1"/>
+                  <rect x="555" y="112" width="3" height="3" fill="#f5d878"/><rect x="560" y="112" width="3" height="3" fill="#f5d878"/>
+                  <rect x="555" y="117" width="3" height="3" fill="#f5d878"/><rect x="560" y="117" width="3" height="3" fill="#f5d878"/>
+
+                  <!-- Right Palm Tree -->
+                  <path d="M605 140 Q615 95 625 60" stroke="#f5d878" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M625 60 Q605 45 595 50 M625 60 Q612 32 605 20 M625 60 Q635 32 642 22 M625 60 Q645 42 655 48" stroke="#f5d878" stroke-width="1.8" stroke-linecap="round"/>
+
+                  <path d="M625 140 Q635 125 650 130 Q665 120 680 140 Z" fill="url(#vGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <defs>
+                    <linearGradient id="vGradFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(245, 216, 120, 0.15)"/>
+                      <stop offset="100%" stop-color="rgba(7, 4, 14, 0.9)"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Screen 2 — About the Bride -->
+            <div class="couple-slide" data-slide="1">
+              <div class="couple-photo-container">
+                <img src="photos/bride.JPG" alt="Prasuna - Bride" loading="lazy" />
+              </div>
+
+              <h4 class="couple-script-title">The Bride</h4>
+              <h3 class="couple-main-name">Prasuna</h3>
+              <div class="couple-mini-heart">♡</div>
+
+              <div class="couple-parents-block">
+                <div class="couple-parents-header">
+                  <span>🌾</span>
+                  <span>Beloved younger daughter of</span>
+                  <span>🌾</span>
+                </div>
+                <div class="couple-parents-names-text">
+                  Sri Darapu Ramakrishna<br>
+                  &<br>
+                  Smt Darapu Prameela Rani
+                </div>
+              </div>
+
+              <!-- Village Backdrop Illustration (Top Image Match) -->
+              <div class="village-backdrop-wrap">
+                <svg class="village-backdrop" viewBox="0 0 700 160" fill="none" width="100%">
+                  <!-- Moon & Stars -->
+                  <path d="M165 25 A 14 14 0 1 0 185 45 A 16 16 0 1 1 165 25 Z" fill="#f5d878" opacity="0.9"/>
+                  <circle cx="60" cy="18" r="1.2" fill="#f5d878"/>
+                  <circle cx="280" cy="20" r="1.5" fill="#f5d878"/>
+                  <circle cx="360" cy="15" r="1.2" fill="#f5d878"/>
+                  <circle cx="460" cy="22" r="1.5" fill="#f5d878"/>
+                  <circle cx="600" cy="16" r="1.2" fill="#f5d878"/>
+
+                  <!-- Sky Clouds -->
+                  <path d="M70 30 Q80 20 95 25 Q110 18 120 28 Q130 24 135 32 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+                  <path d="M520 28 Q535 18 555 24 Q570 15 585 26 Q600 22 610 32 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+
+                  <!-- Ground Line -->
+                  <line x1="15" y1="140" x2="685" y2="140" stroke="#f5d878" stroke-width="2"/>
+                  <line x1="15" y1="141" x2="685" y2="141" stroke="#f5d878" stroke-width="3" opacity="0.4" filter="blur(2px)"/>
+
+                  <!-- Left Palm Tree -->
+                  <path d="M75 140 Q65 95 55 60" stroke="#f5d878" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M55 60 Q35 45 25 50 M55 60 Q42 32 35 20 M55 60 Q65 32 72 22 M55 60 Q75 42 85 48" stroke="#f5d878" stroke-width="1.8" stroke-linecap="round"/>
+                  <path d="M22 140 Q28 128 38 132 Q48 122 58 132 Q65 125 72 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- House 1 -->
+                  <path d="M95 140 L95 110 L120 92 L145 110 L145 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.5"/>
+                  <rect x="122" y="118" width="10" height="22" stroke="#f5d878" stroke-width="1"/>
+                  <rect x="104" y="114" width="4" height="4" fill="#f5d878"/><rect x="110" y="114" width="4" height="4" fill="#f5d878"/>
+                  <rect x="104" y="120" width="4" height="4" fill="#f5d878"/><rect x="110" y="120" width="4" height="4" fill="#f5d878"/>
+
+                  <!-- Tree -->
+                  <path d="M172 140 L172 110" stroke="#f5d878" stroke-width="2"/>
+                  <circle cx="172" cy="85" r="22" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.5"/>
+                  <path d="M172 107 Q162 95 162 82 M172 100 Q182 92 182 80" stroke="#f5d878" stroke-width="1"/>
+
+                  <path d="M198 140 Q205 130 215 132 Q225 125 235 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- House 2 -->
+                  <path d="M225 140 L225 90 L260 62 L295 90 L295 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.8"/>
+                  <rect x="253" y="105" width="14" height="35" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="254" y="74" width="4" height="4" fill="#f5d878"/><rect x="262" y="74" width="4" height="4" fill="#f5d878"/>
+                  <rect x="254" y="80" width="4" height="4" fill="#f5d878"/><rect x="262" y="80" width="4" height="4" fill="#f5d878"/>
+
+                  <!-- Center House -->
+                  <path d="M320 140 L320 80 L360 48 L400 80 L400 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="2"/>
+                  <rect x="352" y="102" width="16" height="38" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="354" y="62" width="5" height="5" fill="#f5d878"/><rect x="362" y="62" width="5" height="5" fill="#f5d878"/>
+                  <rect x="354" y="70" width="5" height="5" fill="#f5d878"/><rect x="362" y="70" width="5" height="5" fill="#f5d878"/>
+
+                  <!-- House 3 -->
+                  <path d="M425 140 L425 90 L460 62 L495 90 L495 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.8"/>
+                  <rect x="453" y="105" width="14" height="35" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="454" y="74" width="4" height="4" fill="#f5d878"/><rect x="462" y="74" width="4" height="4" fill="#f5d878"/>
+                  <rect x="454" y="80" width="4" height="4" fill="#f5d878"/><rect x="462" y="80" width="4" height="4" fill="#f5d878"/>
+
+                  <path d="M495 140 Q502 130 512 132 Q520 125 530 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- Thatched Hut -->
+                  <path d="M525 140 L525 105 L565 105 L565 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.5"/>
+                  <path d="M515 105 Q545 80 575 105 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1.5"/>
+                  <circle cx="545" cy="85" r="2.5" fill="#f5d878"/>
+                  <rect x="540" y="118" width="10" height="22" stroke="#f5d878" stroke-width="1"/>
+                  <rect x="555" y="112" width="3" height="3" fill="#f5d878"/><rect x="560" y="112" width="3" height="3" fill="#f5d878"/>
+                  <rect x="555" y="117" width="3" height="3" fill="#f5d878"/><rect x="560" y="117" width="3" height="3" fill="#f5d878"/>
+
+                  <!-- Right Palm Tree -->
+                  <path d="M605 140 Q615 95 625 60" stroke="#f5d878" stroke-width="2.5" stroke-linecap="round"/>
+                  <path d="M625 60 Q605 45 595 50 M625 60 Q612 32 605 20 M625 60 Q635 32 642 22 M625 60 Q645 42 655 48" stroke="#f5d878" stroke-width="1.8" stroke-linecap="round"/>
+
+                  <path d="M625 140 Q635 125 650 130 Q665 120 680 140 Z" fill="url(#vGradFill2)" stroke="#f5d878" stroke-width="1"/>
+
+                  <defs>
+                    <linearGradient id="vGradFill2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(245, 216, 120, 0.15)"/>
+                      <stop offset="100%" stop-color="rgba(7, 4, 14, 0.9)"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Screen 3 — Our Journey Together -->
+            <div class="couple-slide" data-slide="2">
+              <div class="couple-photo-container">
+                <img src="photos/deloitte.jpeg" alt="Our Journey Together" loading="lazy" />
+              </div>
+
+              <h4 class="couple-script-title">🌿 Together 🌿</h4>
+              <div class="couple-mini-heart">♡</div>
+
+              <div class="journey-content-block">
+                <p class="journey-para">
+                  We both work in <span class="journey-highlight">Deloitte</span> as <span class="journey-highlight">Software Engineers</span>.
+                </p>
+                <p class="journey-para" style="color: #fff5c0;">
+                  We begin the greatest journey of our lives – <span class="journey-highlight">together</span>.
+                </p>
+              </div>
+
+              <!-- City Skyline Illustration (Bottom Image Match) -->
+              <div class="city-skyline-wrap">
+                <svg class="city-skyline" viewBox="0 0 700 160" fill="none" width="100%">
+                  <!-- Moon & Stars -->
+                  <path d="M145 35 A 14 14 0 1 0 165 55 A 16 16 0 1 1 145 35 Z" fill="#f5d878" opacity="0.9"/>
+                  <circle cx="80" cy="20" r="1.2" fill="#f5d878"/>
+                  <circle cx="230" cy="24" r="1.5" fill="#f5d878"/>
+                  <circle cx="370" cy="18" r="1.2" fill="#f5d878"/>
+                  <circle cx="520" cy="25" r="1.5" fill="#f5d878"/>
+                  <circle cx="620" cy="18" r="1.2" fill="#f5d878"/>
+
+                  <!-- Sky Clouds -->
+                  <path d="M90 35 Q105 25 125 30 Q140 22 155 32 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+                  <path d="M480 32 Q495 22 515 28 Q530 20 545 30 Z" fill="none" stroke="#d4a445" stroke-width="0.8" opacity="0.3"/>
+
+                  <!-- Ground Line -->
+                  <line x1="15" y1="140" x2="685" y2="140" stroke="#f5d878" stroke-width="2"/>
+                  <line x1="15" y1="141" x2="685" y2="141" stroke="#f5d878" stroke-width="4" opacity="0.5" filter="blur(2px)"/>
+
+                  <!-- Left Trees & Lamp -->
+                  <path d="M85 140 Q75 125 65 128 Q55 120 45 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1"/>
+                  <path d="M102 140 L102 108" stroke="#f5d878" stroke-width="1.8"/>
+                  <path d="M97 108 L107 108 L102 102 Z" fill="#f5d878"/>
+                  <circle cx="102" cy="105" r="4" fill="#f5d878" filter="blur(1px)"/>
+
+                  <path d="M142 140 Q132 125 122 128 Q112 120 102 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- Skyscraper Cluster -->
+                  <rect x="145" y="112" width="30" height="28" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.2"/>
+
+                  <rect x="175" y="82" width="35" height="58" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.4"/>
+                  <rect x="182" y="90" width="5" height="5" fill="#f5d878"/><rect x="190" y="90" width="5" height="5" fill="#f5d878"/><rect x="198" y="90" width="5" height="5" fill="#f5d878"/>
+                  <rect x="182" y="100" width="5" height="5" fill="#f5d878"/><rect x="190" y="100" width="5" height="5" fill="#f5d878"/><rect x="198" y="100" width="5" height="5" fill="#f5d878"/>
+                  <rect x="182" y="110" width="5" height="5" fill="#f5d878"/><rect x="190" y="110" width="5" height="5" fill="#f5d878"/><rect x="198" y="110" width="5" height="5" fill="#f5d878"/>
+                  <rect x="182" y="120" width="5" height="5" fill="#f5d878"/><rect x="190" y="120" width="5" height="5" fill="#f5d878"/><rect x="198" y="120" width="5" height="5" fill="#f5d878"/>
+
+                  <path d="M210 140 L210 70 L245 55 L245 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <rect x="245" y="102" width="20" height="38" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.2"/>
+
+                  <rect x="265" y="55" width="30" height="85" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <path d="M265 55 L280 40 L295 55 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+                  <line x1="280" y1="40" x2="280" y2="25" stroke="#f5d878" stroke-width="1.5"/>
+                  <circle cx="280" cy="25" r="1.5" fill="#f5d878"/>
+
+                  <rect x="295" y="72" width="28" height="68" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.4"/>
+                  <rect x="300" y="80" width="5" height="5" fill="#f5d878"/><rect x="312" y="80" width="5" height="5" fill="#f5d878"/>
+                  <rect x="300" y="92" width="5" height="5" fill="#f5d878"/><rect x="312" y="92" width="5" height="5" fill="#f5d878"/>
+                  <rect x="300" y="104" width="5" height="5" fill="#f5d878"/><rect x="312" y="104" width="5" height="5" fill="#f5d878"/>
+
+                  <!-- Tallest Center Spire -->
+                  <rect x="323" y="42" width="34" height="98" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.8"/>
+                  <path d="M323 42 L340 28 L357 42 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.8"/>
+                  <line x1="340" y1="28" x2="340" y2="12" stroke="#f5d878" stroke-width="1.8"/>
+                  <circle cx="340" cy="12" r="2" fill="#f5d878"/>
+                  <line x1="327" y1="52" x2="353" y2="52" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="58" x2="353" y2="58" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="64" x2="353" y2="64" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="70" x2="353" y2="70" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="76" x2="353" y2="76" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="82" x2="353" y2="82" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+                  <line x1="327" y1="88" x2="353" y2="88" stroke="#f5d878" stroke-width="1" opacity="0.8"/>
+
+                  <rect x="357" y="105" width="22" height="35" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.2"/>
+                  <rect x="379" y="65" width="30" height="75" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+
+                  <rect x="409" y="78" width="36" height="62" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.4"/>
+                  <rect x="415" y="85" width="5" height="5" fill="#f5d878"/><rect x="424" y="85" width="5" height="5" fill="#f5d878"/><rect x="433" y="85" width="5" height="5" fill="#f5d878"/>
+                  <rect x="415" y="95" width="5" height="5" fill="#f5d878"/><rect x="424" y="95" width="5" height="5" fill="#f5d878"/><rect x="433" y="95" width="5" height="5" fill="#f5d878"/>
+                  <rect x="415" y="105" width="5" height="5" fill="#f5d878"/><rect x="424" y="105" width="5" height="5" fill="#f5d878"/><rect x="433" y="105" width="5" height="5" fill="#f5d878"/>
+                  <rect x="415" y="115" width="5" height="5" fill="#f5d878"/><rect x="424" y="115" width="5" height="5" fill="#f5d878"/><rect x="433" y="115" width="5" height="5" fill="#f5d878"/>
+
+                  <rect x="445" y="102" width="20" height="38" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.2"/>
+                  <path d="M465 140 L465 68 L495 82 L495 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.5"/>
+
+                  <rect x="495" y="72" width="32" height="68" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.4"/>
+                  <rect x="502" y="80" width="5" height="5" fill="#f5d878"/><rect x="514" y="80" width="5" height="5" fill="#f5d878"/>
+                  <rect x="502" y="92" width="5" height="5" fill="#f5d878"/><rect x="514" y="92" width="5" height="5" fill="#f5d878"/>
+                  <rect x="502" y="104" width="5" height="5" fill="#f5d878"/><rect x="514" y="104" width="5" height="5" fill="#f5d878"/>
+
+                  <rect x="527" y="100" width="24" height="40" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.2"/>
+
+                  <rect x="551" y="80" width="28" height="60" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1.4"/>
+                  <line x1="556" y1="88" x2="574" y2="88" stroke="#f5d878" stroke-width="1"/>
+                  <line x1="556" y1="96" x2="574" y2="96" stroke="#f5d878" stroke-width="1"/>
+                  <line x1="556" y1="104" x2="574" y2="104" stroke="#f5d878" stroke-width="1"/>
+                  <line x1="556" y1="112" x2="574" y2="112" stroke="#f5d878" stroke-width="1"/>
+
+                  <!-- Right Trees & Lamp -->
+                  <path d="M592 140 Q582 125 572 128 Q562 120 552 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1"/>
+                  <path d="M608 140 L608 108" stroke="#f5d878" stroke-width="1.8"/>
+                  <path d="M603 108 L613 108 L608 102 Z" fill="#f5d878"/>
+                  <circle cx="608" cy="105" r="4" fill="#f5d878" filter="blur(1px)"/>
+
+                  <path d="M640 140 Q630 122 620 125 Q610 118 600 140 Z" fill="url(#cGradFill)" stroke="#f5d878" stroke-width="1"/>
+
+                  <defs>
+                    <linearGradient id="cGradFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="rgba(245, 216, 120, 0.15)"/>
+                      <stop offset="100%" stop-color="rgba(7, 4, 14, 0.9)"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Card Bottom Navigation Controls -->
+        <div class="couple-card-footer">
+          <button class="couple-nav-btn" id="coupleBackBtn">
+            <span>&lsaquo; Back</span>
+          </button>
+
+          <div class="couple-dots-middle">
+            <span class="couple-dot-item active" data-index="0"></span>
+            <span class="couple-dot-item" data-index="1"></span>
+            <span class="couple-dot-item" data-index="2"></span>
+          </div>
+
+          <div id="coupleRightAction">
+            <button class="couple-nav-btn" id="coupleNextBtn">
+              <span>Next &rsaquo;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Quote Banner below Card -->
+      <div class="couple-bottom-quote-banner">
+        <p class="couple-quote-text">🌿 &ldquo;Two souls. One love. A lifetime to go.&rdquo; 🌿</p>
+        <div style="color: #e05070; font-size: 14px;">♡</div>
+      </div>
+
+      <!-- Bouncing Scroll Down Indicator to next section -->
+      <a href="#story" class="scroll-indicator couple-section-scroll" id="coupleSectionScroll"
+        aria-label="Scroll down to Our Story">
+        <span class="scroll-text">Scroll Down for Our Story</span>
+        <div class="scroll-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </div>
+      </a>
+    </section>
+
+    <!-- Slide 4: Our Story -->
     <section class="story-section" id="story">
       <div class="story-card">
         <h2 class="std-title" style="font-size: clamp(28px, 4vw, 48px); margin-bottom: 14px;">Our Story</h2>
@@ -1605,7 +2466,115 @@
       });
     }, { threshold: 0.65 });
 
-    document.querySelectorAll('.save-date-slide, .story-card').forEach(el => observer.observe(el));
+    document.querySelectorAll('.save-date-slide, .meet-couple-card, .story-card').forEach(el => observer.observe(el));
+
+    // ── Meet the Couple Slider Script ──────────────────
+    (function () {
+      const slides = document.getElementById('coupleSlides');
+      const slideEls = document.querySelectorAll('.couple-slide');
+      const tabs = document.querySelectorAll('.couple-nav-tab');
+      const dots = document.querySelectorAll('.couple-dot-item');
+      const backBtn = document.getElementById('coupleBackBtn');
+      const rightAction = document.getElementById('coupleRightAction');
+      const sliderWrapper = document.getElementById('coupleSlider');
+
+      if (!slides || slideEls.length === 0) return;
+
+      let currentIndex = 0;
+      const totalSlides = slideEls.length;
+
+      function goToSlide(index) {
+        if (index < 0) index = 0;
+        if (index >= totalSlides) index = totalSlides - 1;
+        currentIndex = index;
+
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        slideEls.forEach((slide, idx) => {
+          if (idx === currentIndex) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        });
+
+        tabs.forEach((tab, idx) => {
+          const isActive = idx === currentIndex;
+          tab.classList.toggle('active', isActive);
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === currentIndex);
+        });
+
+        if (backBtn) {
+          backBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+        }
+
+        if (rightAction) {
+          if (currentIndex === totalSlides - 1) {
+            rightAction.innerHTML = `<button class="couple-continue-btn" id="coupleContinueBtn">Continue &rsaquo;</button>`;
+            const contBtn = document.getElementById('coupleContinueBtn');
+            if (contBtn) {
+              contBtn.addEventListener('click', () => {
+                const storySec = document.getElementById('story');
+                if (storySec) storySec.scrollIntoView({ behavior: 'smooth' });
+              });
+            }
+          } else {
+            rightAction.innerHTML = `<button class="couple-nav-btn" id="coupleNextBtn"><span>Next &rsaquo;</span></button>`;
+            const nBtn = document.getElementById('coupleNextBtn');
+            if (nBtn) {
+              nBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+            }
+          }
+        }
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const idx = parseInt(tab.getAttribute('data-index'), 10);
+          goToSlide(idx);
+        });
+      });
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-index'), 10);
+          goToSlide(idx);
+        });
+      });
+
+      if (backBtn) {
+        backBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+      }
+
+      // Touch / Swipe support
+      let startX = 0;
+      let distX = 0;
+
+      sliderWrapper.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        distX = 0;
+      }, { passive: true });
+
+      sliderWrapper.addEventListener('touchmove', (e) => {
+        distX = e.touches[0].clientX - startX;
+      }, { passive: true });
+
+      sliderWrapper.addEventListener('touchend', () => {
+        if (Math.abs(distX) > 40) {
+          if (distX < 0) {
+            goToSlide(currentIndex + 1);
+          } else {
+            goToSlide(currentIndex - 1);
+          }
+        }
+      });
+
+      goToSlide(0);
+    })();
 
     // ── Curtain opening event ─────────────────────────
     (function () {
