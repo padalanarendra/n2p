@@ -7,7 +7,7 @@
   <title>Narendra weds Prasuna — Forever Begins</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=DM+Sans:wght@200;300;400&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400;1,600&family=DM+Sans:wght@200;300;400;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -130,7 +130,7 @@
     .butterfly {
       position: fixed;
       pointer-events: none;
-      z-index: 3;
+      z-index: 1000;
     }
 
     .bfly-glow {
@@ -233,8 +233,8 @@
 
     /* Slide 1: Hero section */
     .hero-section {
-      height: 94vh;
-      min-height: 94vh;
+      height: 100vh;
+      min-height: 100vh;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -242,18 +242,64 @@
       justify-content: center;
       position: relative;
       z-index: 10;
-      padding: 0 16px;
-      margin-top: -15px;
+      padding: 0;
+      margin-top: 0;
       scroll-snap-align: start;
       scroll-snap-stop: always;
+    }
+
+    .hero-card {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      height: 100%;
+      border-radius: 0;
+      border: none;
+      box-shadow: none;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(24px, 4vh, 48px) 16px clamp(20px, 3vh, 36px);
+    }
+
+    .hero-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      z-index: 1;
+    }
+
+    .hero-bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg,
+          rgba(7, 4, 14, 0.75) 0%,
+          rgba(7, 4, 14, 0.35) 30%,
+          rgba(7, 4, 14, 0.2) 60%,
+          rgba(7, 4, 14, 0.85) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
     }
 
     /* Ganesha Symbol */
     .ganesha-symbol {
       opacity: 0;
       animation: enterGanesha 1.5s 0.2s cubic-bezier(.16, 1, .3, 1) forwards;
-      margin-bottom: clamp(4px, 1vh, 10px);
-      filter: drop-shadow(0 0 16px rgba(212, 164, 69, 0.65));
+      margin-bottom: clamp(2px, 0.8vh, 8px);
+      filter: drop-shadow(0 2px 14px rgba(0, 0, 0, 0.85));
       display: flex;
       justify-content: center;
     }
@@ -335,20 +381,23 @@
 
     .name-narendra,
     .name-prasuna {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(42px, 8.5vw, 125px);
+      font-family: 'Outfit', 'Cinzel', 'DM Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 46px);
       font-weight: 600;
-      letter-spacing: .02em;
+      color: #E8D6A7;
+      letter-spacing: 6px;
+      text-transform: uppercase;
       display: block;
-      background: linear-gradient(135deg, #c8a855 0%, #f5d878 28%, #fff5c0 50%, #d4a445 72%, #c8a855 100%);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      filter: drop-shadow(0 0 26px rgba(212, 164, 69, .45));
-      animation: goldShimmer 5s ease infinite;
+      background: none;
+      -webkit-background-clip: unset;
+      -webkit-text-fill-color: #E8D6A7;
+      background-clip: unset;
+      -webkit-text-stroke: 0;
+      text-shadow: 0 2px 12px rgba(232, 214, 167, 0.25), 0 2px 8px rgba(0, 0, 0, 0.6);
+      filter: none;
+      animation: none;
       text-align: center;
-      line-height: 1;
+      line-height: 1.25;
     }
 
     @keyframes goldShimmer {
@@ -390,7 +439,12 @@
     .weds-row {
       display: flex;
       align-items: center;
-      gap: clamp(10px, 2.2vw, 24px);
+      gap: clamp(8px, 1.8vw, 18px);
+      padding: 2px 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      backdrop-filter: none;
     }
 
     .weds-heart-side {
@@ -452,13 +506,14 @@
     }
 
     .weds-text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(14px, 2.4vw, 28px);
-      font-weight: 300;
-      color: #d4a445;
-      letter-spacing: .4em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 2.2vw, 20px);
+      font-style: italic;
+      font-weight: 400;
+      color: #E8D6A7;
+      letter-spacing: 4px;
       text-transform: lowercase;
-      margin-right: -0.4em;
+      text-shadow: 0 2px 10px rgba(232, 214, 167, 0.18), 0 1px 4px rgba(0, 0, 0, 0.8);
     }
 
     .meets-heart {
@@ -496,6 +551,32 @@
       cursor: pointer;
       z-index: 12;
       text-decoration: none;
+    }
+
+    .hero-scroll-indicator {
+      position: relative;
+      bottom: auto;
+      margin-top: 0;
+      z-index: 3;
+      padding: 8px 22px;
+      border-radius: 24px;
+      background: rgba(10, 5, 20, 0.8);
+      border: 1px solid rgba(212, 164, 69, 0.5);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+    }
+
+    .hero-scroll-indicator .scroll-text {
+      color: #fff5c0;
+      font-weight: 500;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
     }
 
     .scroll-text {
@@ -1038,8 +1119,8 @@
     .couple-photo-container {
       position: relative;
       width: 100%;
-      max-width: 230px;
-      height: 175px;
+      max-width: 240px;
+      height: 185px;
       margin: 0 auto 6px;
       border-radius: 18px;
       border: 1.5px solid rgba(212, 164, 69, 0.65);
@@ -1666,91 +1747,98 @@
 
   <!-- Slide 1: Hero Section -->
   <section class="hero-section" id="hero">
+    <div class="hero-card">
+      <img src="photos/boat.jpeg" alt="Narendra and Prasuna" class="hero-bg-img" />
+      <div class="hero-bg-overlay"></div>
 
-    <!-- Lord Ganesha Symbol -->
-    <div class="ganesha-symbol" title="Shree Ganesha">
-      <svg width="65" height="75" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <linearGradient id="ganeshaGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#fff5c0" />
-            <stop offset="35%" stop-color="#f5d878" />
-            <stop offset="70%" stop-color="#d4a445" />
-            <stop offset="100%" stop-color="#c8a855" />
-          </linearGradient>
-          <filter id="ganeshaGlow">
-            <feGaussianBlur stdDeviation="1.8" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        <g filter="url(#ganeshaGlow)" stroke="url(#ganeshaGold)" stroke-linecap="round" stroke-linejoin="round">
-          <!-- Crown / Mukut -->
-          <path d="M50 8 L58 24 L42 24 Z" fill="url(#ganeshaGold)" opacity="0.85" />
-          <path d="M50 4 L50 24" stroke-width="2.2" />
-          <circle cx="50" cy="4" r="2.5" fill="#f5d878" />
-          <!-- Ears -->
-          <path d="M35 32 C20 30 14 42 24 50 C32 56 36 50 36 50" stroke-width="2.5" fill="none" />
-          <path d="M65 32 C80 30 86 42 76 50 C68 56 64 50 64 50" stroke-width="2.5" fill="none" />
-          <!-- Head Arc -->
-          <path d="M36 30 Q50 24 64 30" stroke-width="2" fill="none" />
-          <!-- Tilak -->
-          <path d="M46 28 L54 28 M50 26 L50 36 M46 36 Q50 39 54 36" stroke-width="1.8" stroke="#f5d878" fill="none" />
-          <!-- Trunk (Vakratunda) -->
-          <path d="M50 36 Q52 52 44 64 Q38 72 44 80 Q52 86 60 80 Q64 76 60 70 Q56 66 50 72" stroke-width="3"
-            fill="none" />
-          <!-- Tusks -->
-          <path d="M42 48 L37 49" stroke-width="2.5" />
-          <path d="M58 48 L65 50" stroke-width="2.5" />
-          <!-- Modak / Blessing dot -->
-          <circle cx="62" cy="72" r="3" fill="url(#ganeshaGold)" />
-          <!-- Base lotus arc -->
-          <path d="M30 92 Q50 102 70 92" stroke-width="2" fill="none" opacity="0.8" />
-          <path d="M40 96 Q50 104 60 96" stroke-width="1.5" fill="none" opacity="0.6" />
-        </g>
-      </svg>
-    </div>
-
-    <div class="names-stacked">
-      <!-- 1. Narendra (Top) -->
-      <div class="letter-wrap-n"><span class="name-narendra">Narendra</span></div>
-
-      <!-- 3. weds in between (reveals later after Narendra & Prasuna appear together) -->
-      <div class="weds-wrap">
-        <div class="meets-orn">
-          <div class="orn-line show"></div>
-          <div class="orn-diamond"></div>
-          <div class="orn-line r show"></div>
+      <div class="hero-content">
+        <!-- Lord Ganesha Symbol -->
+        <div class="ganesha-symbol" title="Shree Ganesha">
+          <svg width="65" height="75" viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ganeshaGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fff5c0" />
+                <stop offset="35%" stop-color="#f5d878" />
+                <stop offset="70%" stop-color="#d4a445" />
+                <stop offset="100%" stop-color="#c8a855" />
+              </linearGradient>
+              <filter id="ganeshaGlow">
+                <feGaussianBlur stdDeviation="1.8" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            <g filter="url(#ganeshaGlow)" stroke="url(#ganeshaGold)" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Crown / Mukut -->
+              <path d="M50 8 L58 24 L42 24 Z" fill="url(#ganeshaGold)" opacity="0.85" />
+              <path d="M50 4 L50 24" stroke-width="2.2" />
+              <circle cx="50" cy="4" r="2.5" fill="#f5d878" />
+              <!-- Ears -->
+              <path d="M35 32 C20 30 14 42 24 50 C32 56 36 50 36 50" stroke-width="2.5" fill="none" />
+              <path d="M65 32 C80 30 86 42 76 50 C68 56 64 50 64 50" stroke-width="2.5" fill="none" />
+              <!-- Head Arc -->
+              <path d="M36 30 Q50 24 64 30" stroke-width="2" fill="none" />
+              <!-- Tilak -->
+              <path d="M46 28 L54 28 M50 26 L50 36 M46 36 Q50 39 54 36" stroke-width="1.8" stroke="#f5d878"
+                fill="none" />
+              <!-- Trunk (Vakratunda) -->
+              <path d="M50 36 Q52 52 44 64 Q38 72 44 80 Q52 86 60 80 Q64 76 60 70 Q56 66 50 72" stroke-width="3"
+                fill="none" />
+              <!-- Tusks -->
+              <path d="M42 48 L37 49" stroke-width="2.5" />
+              <path d="M58 48 L65 50" stroke-width="2.5" />
+              <!-- Modak / Blessing dot -->
+              <circle cx="62" cy="72" r="3" fill="url(#ganeshaGold)" />
+              <!-- Base lotus arc -->
+              <path d="M30 92 Q50 102 70 92" stroke-width="2" fill="none" opacity="0.8" />
+              <path d="M40 96 Q50 104 60 96" stroke-width="1.5" fill="none" opacity="0.6" />
+            </g>
+          </svg>
         </div>
 
-        <div class="weds-row">
-          <span class="weds-heart-side">♥</span>
-          <span class="weds-text">weds</span>
-          <span class="weds-heart-side">♥</span>
-        </div>
+        <div class="names-stacked">
+          <!-- 1. Narendra (Top) -->
+          <div class="letter-wrap-n"><span class="name-narendra">NARENDRA</span></div>
 
-        <div class="meets-orn bot">
-          <div class="orn-line show"></div>
-          <div class="orn-diamond"></div>
-          <div class="orn-line r show"></div>
+          <!-- 3. weds in between (reveals later after Narendra & Prasuna appear together) -->
+          <div class="weds-wrap">
+            <div class="meets-orn">
+              <div class="orn-line show"></div>
+              <div class="orn-diamond"></div>
+              <div class="orn-line r show"></div>
+            </div>
+
+            <div class="weds-row">
+              <span class="weds-heart-side">❤</span>
+              <span class="weds-text">weds</span>
+              <span class="weds-heart-side">❤</span>
+            </div>
+
+            <div class="meets-orn bot">
+              <div class="orn-line show"></div>
+              <div class="orn-diamond"></div>
+              <div class="orn-line r show"></div>
+            </div>
+          </div>
+
+          <!-- 2. Prasuna (Bottom) -->
+          <div class="letter-wrap-p"><span class="name-prasuna">PRASUNA</span></div>
         </div>
       </div>
 
-      <!-- 2. Prasuna (Bottom) -->
-      <div class="letter-wrap-p"><span class="name-prasuna">Prasuna</span></div>
+      <!-- Slide Up / Scroll Down Indicator below couple -->
+      <a href="#saveTheDate" class="scroll-indicator hero-scroll-indicator" id="scrollIndicator">
+        <span class="scroll-text">Scroll Down</span>
+        <div class="scroll-arrow">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </div>
+      </a>
     </div>
-
-    <!-- Slide Up Indicator below names -->
-    <a href="#saveTheDate" class="scroll-indicator" id="scrollIndicator">
-      <span class="scroll-text">Slide Up to Explore</span>
-      <div class="scroll-arrow">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 19V5M5 12l7-7 7 7" />
-        </svg>
-      </div>
-    </a>
   </section>
 
   <!-- Full Slide Deck -->
@@ -2241,7 +2329,8 @@
             <!-- Screen 3 — Our Journey Together -->
             <div class="couple-slide" data-slide="2">
               <div class="couple-photo-container">
-                <img src="photos/deloitte.jpeg" alt="Our Journey Together" loading="lazy" />
+                <img src="photos/deloitte.jpeg" alt="Our Journey Together" loading="lazy"
+                  style="object-position: center 55%;" />
               </div>
 
               <h4 class="couple-script-title">🌿 Together 🌿</h4>
