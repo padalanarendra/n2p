@@ -2847,14 +2847,26 @@
       const curtain = document.getElementById('curtain');
       let opened = false;
 
+      // Prevent browser from restoring scroll position to lower sections on reload
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
       function openCurtain() {
         if (opened) return;
         opened = true;
+
+        // Immediately scroll to Hero section (top 0) when curtain is clicked
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        const heroEl = document.getElementById('hero');
+        if (heroEl) heroEl.scrollIntoView({ behavior: 'instant' });
 
         curtain.classList.add('opening');
 
         setTimeout(() => {
           document.body.classList.remove('curtain-on');
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
           setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6600);
           setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6800);
         }, 1000);
