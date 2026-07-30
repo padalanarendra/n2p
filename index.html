@@ -1788,7 +1788,7 @@
       height: 185px;
       z-index: 10;
       pointer-events: none;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
       filter: drop-shadow(0 6px 16px rgba(0,0,0,0.85));
     }
     .jny-train-svg-wrap {
@@ -3710,14 +3710,16 @@
         }
       }
 
-      function updateTrainPosition() {
+      let currentTrainY = 0;
+      let targetTrainY = 0;
+      let isAnimating = false;
+
+      function calcTargetTrainY() {
         const timelineRect = timeline.getBoundingClientRect();
         const viewportHeight = window.innerHeight;
         const timelineHeight = timelineRect.height;
-        if (timelineHeight <= 0) return;
+        if (timelineHeight <= 0) return 0;
 
-        // Train starts at top (0px) when timeline top is at 20% of viewport (Station 1 entrance)
-        // Train reaches bottom when timeline bottom reaches 85% of viewport
         const startTrigger = viewportHeight * 0.2;
         const endTrigger = viewportHeight * 0.85;
 
@@ -3727,13 +3729,12 @@
         let progress = currentPos / Math.max(1, maxPos);
         progress = Math.max(0, Math.min(1, progress));
 
-        // Train moves from top (0px) down to the end of the track (timelineHeight - 185px)
         const maxTrainY = Math.max(0, timelineHeight - 185);
-        const trainY = progress * maxTrainY;
+        return progress * maxTrainY;
+      }
 
-        train.style.transform = `translateY(${trainY}px)`;
-
-        // Highlight stations based on scroll position
+      function updateStationStates() {
+        const viewportHeight = window.innerHeight;
         stations.forEach((st) => {
           const stRect = st.getBoundingClientRect();
           const stCenter = stRect.top + stRect.height / 2;
@@ -3752,9 +3753,36 @@
         });
       }
 
-      window.addEventListener('scroll', updateTrainPosition, { passive: true });
-      window.addEventListener('resize', updateTrainPosition, { passive: true });
-      updateTrainPosition();
+      function animateTrain() {
+        targetTrainY = calcTargetTrainY();
+        const diff = targetTrainY - currentTrainY;
+        currentTrainY += diff * 0.15;
+
+        if (Math.abs(diff) < 0.05) {
+          currentTrainY = targetTrainY;
+        }
+
+        train.style.transform = `translate3d(0, ${currentTrainY.toFixed(2)}px, 0)`;
+        updateStationStates();
+
+        if (Math.abs(targetTrainY - currentTrainY) > 0.05) {
+          requestAnimationFrame(animateTrain);
+        } else {
+          isAnimating = false;
+        }
+      }
+
+      function onScrollOrResize() {
+        targetTrainY = calcTargetTrainY();
+        if (!isAnimating) {
+          isAnimating = true;
+          requestAnimationFrame(animateTrain);
+        }
+      }
+
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
+      window.addEventListener('resize', onScrollOrResize, { passive: true });
+      onScrollOrResize();
     })();
   </script>
 
