@@ -20,7 +20,6 @@
 
     html {
       scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
     }
 
     html,
@@ -38,15 +37,13 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
-      overflow-y: scroll;
-      scroll-snap-type: y mandatory;
+      overflow-y: auto;
     }
 
     html.curtain-active,
     body.curtain-on {
       overflow: hidden !important;
       height: 100vh !important;
-      scroll-snap-type: none !important;
     }
 
     #starfield {
@@ -246,8 +243,6 @@
       z-index: 10;
       padding: 0;
       margin-top: 0;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
     }
 
     .hero-card {
@@ -1647,8 +1642,6 @@
       padding: 60px 16px 80px;
       position: relative;
       overflow: hidden;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
     }
 
     /* Moon element */
