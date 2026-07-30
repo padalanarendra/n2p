@@ -7,7 +7,7 @@
   <title>Narendra weds Prasuna — Forever Begins</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400;1,600&family=DM+Sans:wght@200;300;400;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=DM+Sans:wght@200;300;400;600&family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Poppins:wght@300;400;500;600&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -42,9 +42,11 @@
       scroll-snap-type: y mandatory;
     }
 
+    html.curtain-active,
     body.curtain-on {
-      overflow: hidden;
-      height: 100vh;
+      overflow: hidden !important;
+      height: 100vh !important;
+      scroll-snap-type: none !important;
     }
 
     #starfield {
@@ -1633,6 +1635,449 @@
     #curtain.gone {
       display: none;
     }
+
+    /* ══════════════════════════════════════════════════
+       WEDDING EVENTS JOURNEY — Mobile First Redesign
+    ══════════════════════════════════════════════════ */
+    .journey-section {
+      position: relative;
+      width: 100%;
+      background: #090611;
+      background: radial-gradient(ellipse at top center, #150a24 0%, #090611 70%);
+      padding: 60px 16px 80px;
+      position: relative;
+      overflow: hidden;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    /* Moon element */
+    .jny-moon-wrap {
+      position: absolute;
+      top: 35px;
+      right: 20px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .jny-moon-disc {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fffdf0 0%, #f5d878 45%, #d4a445 85%);
+      box-shadow: 0 0 25px rgba(245, 216, 120, 0.6), 0 0 60px rgba(212, 164, 69, 0.25);
+      animation: jnyMoonFloat 6s ease-in-out infinite alternate;
+    }
+    @keyframes jnyMoonFloat {
+      0% { transform: translateY(0) scale(1); filter: brightness(1); }
+      100% { transform: translateY(-6px) scale(1.03); filter: brightness(1.15); }
+    }
+
+    /* Stars & particles overlay */
+    .jny-stars-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Header */
+    .jny-header-block {
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 5;
+    }
+    .jny-header-badge {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(10px, 1.3vw, 12px);
+      letter-spacing: 0.28em;
+      color: #d4a445;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: inline-block;
+      text-shadow: 0 0 10px rgba(212, 164, 69, 0.4);
+    }
+    .jny-main-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 6vw, 46px);
+      font-weight: 600;
+      color: #fff5c0;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      text-shadow: 0 0 24px rgba(245, 216, 120, 0.35);
+    }
+    .jny-subtitle-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(14px, 2.2vw, 19px);
+      color: #b8b1c7;
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 16px;
+    }
+    .jny-header-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: #d4a445;
+      opacity: 0.7;
+    }
+    .jny-header-divider .line {
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4a445, transparent);
+    }
+
+    /* Track & Journey Layout Container */
+    .jny-timeline-container {
+      position: relative;
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding-left: 54px; /* Space for left-aligned track */
+      padding-bottom: 40px; /* Space at bottom for train to park at final station */
+      z-index: 5;
+    }
+
+    /* Vertical Golden Railway Track */
+    .jny-railway-track {
+      position: absolute;
+      top: 10px;
+      bottom: 20px;
+      left: 20px;
+      width: 20px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    /* Steel rails */
+    .jny-railway-track::before,
+    .jny-railway-track::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2.5px;
+      background: linear-gradient(180deg, #d4a445 0%, #f5d878 50%, #d4a445 100%);
+      box-shadow: 0 0 8px rgba(212, 164, 69, 0.6);
+    }
+    .jny-railway-track::before { left: 2px; }
+    .jny-railway-track::after { right: 2px; }
+
+    /* Wooden Sleepers */
+    .jny-railway-ties {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        180deg,
+        transparent 0px,
+        transparent 16px,
+        #7c561b 16px,
+        #7c561b 20px
+      );
+      box-shadow: inset 0 0 4px rgba(0,0,0,0.8);
+      opacity: 0.75;
+    }
+
+    /* Floating Vintage Multi-Compartment Steam Train */
+    .jny-train-tracker {
+      position: absolute;
+      left: 6px;
+      width: 48px;
+      height: 185px;
+      z-index: 10;
+      pointer-events: none;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: drop-shadow(0 6px 16px rgba(0,0,0,0.85));
+    }
+    .jny-train-svg-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+    /* Train Headlight beam */
+    .jny-train-headlight-beam {
+      position: absolute;
+      bottom: -45px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 55px;
+      background: radial-gradient(ellipse at top, rgba(255, 248, 215, 0.7) 0%, rgba(245, 216, 120, 0.2) 50%, transparent 80%);
+      pointer-events: none;
+      clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+    }
+    /* Steam Puffs */
+    .jny-steam-container {
+      position: absolute;
+      bottom: 2px;
+      left: 18px;
+      width: 12px;
+      height: 12px;
+    }
+    .jny-steam-puff {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.45);
+      filter: blur(2px);
+      animation: jnySteamRise 2s ease-out infinite;
+    }
+    .jny-steam-puff:nth-child(2) { animation-delay: 0.6s; }
+    .jny-steam-puff:nth-child(3) { animation-delay: 1.2s; }
+    @keyframes jnySteamRise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0.8; }
+      100% { transform: translateY(24px) scale(2.2); opacity: 0; }
+    }
+
+    /* Individual Station Box */
+    .jny-station-item {
+      position: relative;
+      margin-bottom: 45px;
+      opacity: 0.4;
+      transform: translateY(20px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .jny-station-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .jny-station-item.reached {
+      opacity: 0.9;
+      transform: translateY(0);
+    }
+
+    /* Station Pin / Node on Track */
+    .jny-station-pin {
+      position: absolute;
+      left: -44px;
+      top: 24px;
+      width: 20px;
+      height: 20px;
+      z-index: 6;
+    }
+    .jny-pin-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #1e1233;
+      border: 2px solid #d4a445;
+      box-shadow: 0 0 10px rgba(212, 164, 69, 0.4);
+      transition: all 0.4s ease;
+      position: relative;
+    }
+    .jny-station-item.active .jny-pin-dot {
+      background: #f5d878;
+      border-color: #ffffff;
+      box-shadow: 0 0 18px #f5d878, 0 0 30px rgba(245, 216, 120, 0.8);
+      transform: scale(1.25);
+    }
+    .jny-station-item.reached .jny-pin-dot {
+      background: #d4a445;
+      border-color: #f5d878;
+      box-shadow: 0 0 12px rgba(212, 164, 69, 0.6);
+    }
+    .jny-pin-pulse {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 1px solid rgba(245, 216, 120, 0.6);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .jny-station-item.active .jny-pin-pulse {
+      animation: jnyPinPulseAnim 1.8s ease-out infinite;
+    }
+    @keyframes jnyPinPulseAnim {
+      0% { transform: scale(0.8); opacity: 0.9; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Connector line from Pin to Card */
+    .jny-station-connector {
+      position: absolute;
+      left: -24px;
+      top: 31px;
+      width: 24px;
+      height: 1.5px;
+      background: linear-gradient(90deg, #d4a445, rgba(212, 164, 69, 0.3));
+      transition: all 0.4s ease;
+    }
+    .jny-station-item.active .jny-station-connector {
+      background: linear-gradient(90deg, #f5d878, #d4a445);
+      box-shadow: 0 0 8px rgba(245, 216, 120, 0.8);
+    }
+
+    /* Station Event Card */
+    .jny-event-card {
+      background: linear-gradient(145deg, rgba(24, 14, 40, 0.85) 0%, rgba(14, 7, 24, 0.92) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(212, 164, 69, 0.28);
+      border-radius: 20px;
+      padding: 20px 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(212, 164, 69, 0.04);
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s ease;
+    }
+    .jny-station-item.active .jny-event-card {
+      border-color: rgba(245, 216, 120, 0.7);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), 0 0 25px rgba(245, 216, 120, 0.25), inset 0 0 25px rgba(245, 216, 120, 0.08);
+    }
+
+    /* Card Top Header */
+    .jny-card-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .jny-station-number {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: #d4a445;
+      text-transform: uppercase;
+      background: rgba(212, 164, 69, 0.12);
+      padding: 3px 10px;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 164, 69, 0.25);
+    }
+    .jny-card-date-pill {
+      font-family: 'Poppins', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #fff5c0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .jny-card-date-pill .time-tag {
+      color: #d4a445;
+      font-weight: 300;
+      font-size: 10.5px;
+    }
+
+    /* Title */
+    .jny-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 4.5vw, 28px);
+      font-weight: 600;
+      color: #fff5c0;
+      margin: 0 0 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .jny-card-desc {
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      color: rgba(255, 245, 220, 0.85);
+      line-height: 1.55;
+      margin: 0 0 14px 0;
+    }
+
+    /* Illustration Box */
+    .jny-card-illust-box {
+      width: 100%;
+      background: rgba(9, 4, 16, 0.6);
+      border: 1px solid rgba(212, 164, 69, 0.18);
+      border-radius: 14px;
+      padding: 12px 10px 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .jny-card-illust-box svg {
+      width: 100%;
+      max-height: 85px;
+      height: auto;
+    }
+
+    /* ══════════════════════════════════════
+       FINAL MARRIAGE STATION — Grand Styling
+    ══════════════════════════════════════ */
+    .jny-station-item.final-station {
+      margin-bottom: 10px;
+    }
+    .jny-station-item.final-station .jny-event-card {
+      background: linear-gradient(160deg, rgba(32, 18, 54, 0.95) 0%, rgba(14, 7, 24, 0.98) 100%);
+      border: 1.5px solid rgba(245, 216, 120, 0.6);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 216, 120, 0.3);
+      padding: 24px 20px;
+    }
+    .jny-final-crown-header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+    .jny-final-crown-header span {
+      font-size: 26px;
+      display: inline-block;
+      animation: jnyCrownGlow 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes jnyCrownGlow {
+      0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(245, 216, 120, 0.5)); }
+      100% { transform: scale(1.12); filter: drop-shadow(0 0 14px rgba(245, 216, 120, 0.9)); }
+    }
+    .jny-final-title {
+      font-size: clamp(26px, 5.5vw, 34px) !important;
+      text-align: center;
+      justify-content: center;
+      color: #fff5c0 !important;
+      text-shadow: 0 0 20px rgba(245, 216, 120, 0.6);
+    }
+    .jny-final-badge {
+      background: linear-gradient(135deg, #d4a445, #f5d878) !important;
+      color: #07040e !important;
+      font-weight: 700 !important;
+      border: none !important;
+      box-shadow: 0 0 12px rgba(245, 216, 120, 0.5);
+    }
+
+    /* Final Message Banner */
+    .jny-final-banner {
+      margin-top: 18px;
+      padding: 14px 12px;
+      border-radius: 14px;
+      background: rgba(212, 164, 69, 0.08);
+      border: 1px dashed rgba(245, 216, 120, 0.4);
+      text-align: center;
+      position: relative;
+    }
+    .jny-final-banner-text-1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #b8b1c7;
+      margin-bottom: 4px;
+    }
+    .jny-final-banner-text-2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 4vw, 24px);
+      font-weight: 600;
+      color: #fff5c0;
+      text-shadow: 0 0 15px rgba(245, 216, 120, 0.7);
+    }
+
+    /* Sparkles for final station */
+    .jny-sparkle-particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #f5d878;
+      box-shadow: 0 0 6px #f5d878;
+      pointer-events: none;
+      animation: jnySparkleAnim 2s infinite ease-in-out;
+    }
+    @keyframes jnySparkleAnim {
+      0%, 100% { opacity: 0; transform: scale(0.3); }
+      50% { opacity: 1; transform: scale(1.4); }
+    }
   </style>
 </head>
 
@@ -2546,9 +2991,9 @@
       </div>
 
       <!-- Bouncing Scroll Down Indicator to next section -->
-      <a href="#story" class="scroll-indicator couple-section-scroll" id="coupleSectionScroll"
-        aria-label="Scroll down to Our Story">
-        <span class="scroll-text">Scroll Down for Our Story</span>
+      <a href="#journey" class="scroll-indicator couple-section-scroll" id="coupleSectionScroll"
+        aria-label="Scroll down to Wedding Journey">
+        <span class="scroll-text">The Journey Continues</span>
         <div class="scroll-arrow">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -2556,6 +3001,294 @@
           </svg>
         </div>
       </a>
+    </section>
+
+    <!-- Slide 3.5: Wedding Events Journey Section -->
+    <section class="journey-section" id="journey">
+
+      <!-- Moon in top corner -->
+      <div class="jny-moon-wrap">
+        <div class="jny-moon-disc"></div>
+      </div>
+
+      <!-- Header -->
+      <div class="jny-header-block">
+        <span class="jny-header-badge">✦ OUR WEDDING EVENTS ✦</span>
+        <h2 class="jny-main-title">The Journey Continues</h2>
+        <p class="jny-subtitle-text">
+          "Every journey has a destination. Ours now arrives at the most beautiful celebration of our lives."
+        </p>
+        <div class="jny-header-divider">
+          <div class="line"></div>
+          <span>🚂</span>
+          <div class="line"></div>
+        </div>
+      </div>
+
+      <!-- Timeline & Railway Track Container -->
+      <div class="jny-timeline-container" id="jnyTimeline">
+
+        <!-- Vertical Railway Track -->
+        <div class="jny-railway-track">
+          <div class="jny-railway-ties"></div>
+        </div>
+
+        <!-- Moving Multi-Compartment Train SVG Tracker -->
+        <div class="jny-train-tracker" id="jnyTrain">
+          <!-- Train SVG -->
+          <div class="jny-train-svg-wrap">
+            <svg viewBox="0 0 50 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- 1. Guard Van / Rear Carriage (Top) -->
+              <g class="train-coach coach-rear">
+                <circle cx="25" cy="4" r="3" fill="#ff4444" filter="drop-shadow(0 0 6px #ff2222)" />
+                <rect x="10" y="6" width="30" height="6" rx="2" fill="#d4a445" />
+                <rect x="12" y="12" width="26" height="32" rx="3" fill="#1c0f30" stroke="#d4a445" stroke-width="1.5" />
+                <rect x="16" y="18" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="27" y="18" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="16" y="30" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="27" y="30" width="7" height="9" rx="2" fill="#fff5c0" />
+                <line x1="12" y1="28" x2="38" y2="28" stroke="#f5d878" stroke-width="1" />
+              </g>
+
+              <!-- Coupler 1 -->
+              <rect x="23" y="44" width="4" height="8" fill="#d4a445" />
+
+              <!-- 2. Passenger Carriage 1 (Middle) -->
+              <g class="train-coach coach-mid">
+                <rect x="10" y="52" width="30" height="6" rx="2" fill="#d4a445" />
+                <rect x="12" y="58" width="26" height="38" rx="3" fill="#2d174a" stroke="#d4a445" stroke-width="1.5" />
+                <rect x="16" y="64" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="27" y="64" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="16" y="78" width="7" height="9" rx="2" fill="#fff5c0" />
+                <rect x="27" y="78" width="7" height="9" rx="2" fill="#fff5c0" />
+                <line x1="12" y1="75" x2="38" y2="75" stroke="#f5d878" stroke-width="1.2" />
+              </g>
+
+              <!-- Coupler 2 -->
+              <rect x="23" y="96" width="4" height="8" fill="#d4a445" />
+
+              <!-- 3. Coal Tender / Fuel Wagon -->
+              <g class="train-coach coach-tender">
+                <rect x="13" y="104" width="24" height="24" rx="3" fill="#150a24" stroke="#d4a445" stroke-width="1.5" />
+                <ellipse cx="25" cy="116" rx="8" ry="5" fill="#3a2552" />
+                <circle cx="20" cy="114" r="3" fill="#261738" />
+                <circle cx="29" cy="118" r="4" fill="#261738" />
+              </g>
+
+              <!-- Coupler 3 -->
+              <rect x="23" y="128" width="4" height="8" fill="#d4a445" />
+
+              <!-- 4. Main Steam Locomotive Engine (Lead Front) -->
+              <g class="train-engine">
+                <rect x="9" y="136" width="32" height="20" rx="3" fill="#d4a445" />
+                <rect x="14" y="140" width="8" height="10" rx="2" fill="#fff5c0" />
+                <rect x="28" y="140" width="8" height="10" rx="2" fill="#fff5c0" />
+
+                <rect x="12" y="156" width="26" height="28" rx="5" fill="#1c0f30" stroke="#d4a445" stroke-width="1.8" />
+                <rect x="15" y="160" width="20" height="20" rx="3" fill="#2d174a" />
+
+                <line x1="12" y1="164" x2="38" y2="164" stroke="#f5d878" stroke-width="1.5" />
+                <line x1="12" y1="174" x2="38" y2="174" stroke="#f5d878" stroke-width="1.5" />
+                <circle cx="25" cy="170" r="4" fill="#f5d878" />
+
+                <path d="M14 184 L25 192 L36 184" stroke="#d4a445" stroke-width="2" fill="none" />
+
+                <circle cx="25" cy="186" r="5" fill="#fff5c0" stroke="#d4a445" stroke-width="1.5" />
+                <circle cx="25" cy="186" r="3" fill="#ffffff" />
+              </g>
+            </svg>
+            <div class="jny-train-headlight-beam"></div>
+
+            <!-- Steam Puffs at Front Chimney -->
+            <div class="jny-steam-container">
+              <div class="jny-steam-puff"></div>
+              <div class="jny-steam-puff"></div>
+              <div class="jny-steam-puff"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Station 1: Pandiri Rata -->
+        <div class="jny-station-item" id="jnyStation1">
+          <div class="jny-station-pin">
+            <div class="jny-pin-dot"></div>
+            <div class="jny-pin-pulse"></div>
+          </div>
+          <div class="jny-station-connector"></div>
+
+          <div class="jny-event-card">
+            <div class="jny-card-top-row">
+              <span class="jny-station-number">STATION 1</span>
+              <div class="jny-card-date-pill">
+                <span>24 August</span>
+                <span class="time-tag">· Morning</span>
+              </div>
+            </div>
+
+            <h3 class="jny-card-title">🌿 Pandiri Rata</h3>
+            <p class="jny-card-desc">The joyful beginning of our wedding celebrations.</p>
+
+            <div class="jny-card-illust-box">
+              <svg viewBox="0 0 260 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Toranam (Mango Leaf Garland Arch) -->
+                <path d="M10 20 Q130 50 250 20" stroke="#d4a445" stroke-width="1.8" fill="none" />
+                <!-- Mango Leaves -->
+                <path d="M30 22 C25 38 35 48 35 48 C35 48 45 38 40 22 Z" fill="#4a7c36" stroke="#d4a445" stroke-width="0.8" />
+                <path d="M60 27 C55 43 65 53 65 53 C65 53 75 43 70 27 Z" fill="#3f6d2e" stroke="#d4a445" stroke-width="0.8" />
+                <path d="M90 31 C85 47 95 57 95 57 C95 57 105 47 100 31 Z" fill="#4a7c36" stroke="#d4a445" stroke-width="0.8" />
+                <path d="M130 33 C125 49 135 59 135 59 C135 59 145 49 140 33 Z" fill="#588d43" stroke="#f5d878" stroke-width="0.8" />
+                <path d="M160 31 C155 47 165 57 165 57 C165 57 175 47 170 31 Z" fill="#4a7c36" stroke="#d4a445" stroke-width="0.8" />
+                <path d="M190 27 C185 43 195 53 195 53 C195 53 205 43 200 27 Z" fill="#3f6d2e" stroke="#d4a445" stroke-width="0.8" />
+                <path d="M220 22 C215 38 225 48 225 48 C225 48 235 38 230 22 Z" fill="#4a7c36" stroke="#d4a445" stroke-width="0.8" />
+                <!-- Oil Lamps (Diyas) at entrance -->
+                <path d="M50 62 Q65 62 70 54 Q45 54 50 62 Z" fill="#d4a445" />
+                <path d="M60 54 Q60 46 62 43 Q64 46 64 54 Z" fill="#f5d878" />
+                <circle cx="62" cy="43" r="2" fill="#ffffff" />
+                <path d="M190 62 Q205 62 210 54 Q185 54 190 62 Z" fill="#d4a445" />
+                <path d="M200 54 Q200 46 202 43 Q204 46 204 54 Z" fill="#f5d878" />
+                <circle cx="202" cy="43" r="2" fill="#ffffff" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Station 2: Haldi -->
+        <div class="jny-station-item" id="jnyStation2">
+          <div class="jny-station-pin">
+            <div class="jny-pin-dot"></div>
+            <div class="jny-pin-pulse"></div>
+          </div>
+          <div class="jny-station-connector"></div>
+
+          <div class="jny-event-card">
+            <div class="jny-card-top-row">
+              <span class="jny-station-number">STATION 2</span>
+              <div class="jny-card-date-pill">
+                <span>24 August</span>
+                <span class="time-tag">· Evening</span>
+              </div>
+            </div>
+
+            <h3 class="jny-card-title">🌼 Haldi</h3>
+            <p class="jny-card-desc">A celebration filled with turmeric, laughter and blessings.</p>
+
+            <div class="jny-card-illust-box">
+              <svg viewBox="0 0 260 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Haldi Bowl -->
+                <ellipse cx="130" cy="55" rx="42" ry="14" fill="#2d1a04" stroke="#d4a445" stroke-width="1.8" />
+                <ellipse cx="130" cy="52" rx="36" ry="10" fill="#f5b800" />
+                <ellipse cx="130" cy="51" rx="28" ry="7" fill="#ffe066" />
+                <!-- Marigold Flowers -->
+                <circle cx="65" cy="48" r="14" fill="#ff9900" stroke="#d4a445" stroke-width="1" />
+                <circle cx="65" cy="48" r="8" fill="#ffcc00" />
+                <circle cx="195" cy="48" r="14" fill="#ff9900" stroke="#d4a445" stroke-width="1" />
+                <circle cx="195" cy="48" r="8" fill="#ffcc00" />
+                <!-- Decorative Petals floating -->
+                <circle cx="95" cy="30" r="4" fill="#ffcc00" opacity="0.8" />
+                <circle cx="165" cy="32" r="5" fill="#ff9900" opacity="0.8" />
+                <circle cx="130" cy="22" r="4" fill="#ffe066" opacity="0.9" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Station 3: Reception Lunch -->
+        <div class="jny-station-item" id="jnyStation3">
+          <div class="jny-station-pin">
+            <div class="jny-pin-dot"></div>
+            <div class="jny-pin-pulse"></div>
+          </div>
+          <div class="jny-station-connector"></div>
+
+          <div class="jny-event-card">
+            <div class="jny-card-top-row">
+              <span class="jny-station-number">STATION 3</span>
+              <div class="jny-card-date-pill">
+                <span>26 August</span>
+                <span class="time-tag">· Afternoon</span>
+              </div>
+            </div>
+
+            <h3 class="jny-card-title">🍽 Reception Lunch</h3>
+            <p class="jny-card-desc">Join us for lunch as we celebrate together before the wedding ceremony.</p>
+
+            <div class="jny-card-illust-box">
+              <svg viewBox="0 0 260 75" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Banquet Dining Setup -->
+                <rect x="30" y="48" width="200" height="8" rx="3" fill="#d4a445" opacity="0.7" />
+                <!-- Plates & Feast setup -->
+                <ellipse cx="80" cy="46" rx="20" ry="7" fill="#1c0f30" stroke="#d4a445" stroke-width="1.2" />
+                <ellipse cx="80" cy="46" rx="14" ry="4" fill="#4a7c36" />
+                <ellipse cx="180" cy="46" rx="20" ry="7" fill="#1c0f30" stroke="#d4a445" stroke-width="1.2" />
+                <ellipse cx="180" cy="46" rx="14" ry="4" fill="#4a7c36" />
+                <!-- Floral Centerpiece Pot -->
+                <path d="M122 48 L138 48 L134 32 L126 32 Z" fill="#d4a445" />
+                <circle cx="130" cy="24" r="12" fill="#e05070" opacity="0.8" />
+                <circle cx="130" cy="24" r="7" fill="#fff5c0" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Final Station: Marriage -->
+        <div class="jny-station-item final-station" id="jnyStation4">
+          <div class="jny-station-pin">
+            <div class="jny-pin-dot"></div>
+            <div class="jny-pin-pulse"></div>
+          </div>
+          <div class="jny-station-connector"></div>
+
+          <div class="jny-event-card">
+            <!-- Crown Header -->
+            <div class="jny-final-crown-header">
+              <span>👑</span>
+            </div>
+
+            <div class="jny-card-top-row" style="justify-content: center; margin-bottom: 8px;">
+              <span class="jny-station-number jny-final-badge">FINAL DESTINATION</span>
+            </div>
+
+            <h3 class="jny-card-title jny-final-title">💍 Marriage</h3>
+
+            <div class="jny-card-date-pill" style="justify-content: center; margin-bottom: 12px;">
+              <span style="color: #f5d878; font-weight: 600;">26 August</span>
+              <span class="time-tag" style="color: #fff5c0; font-weight: 500;">· 10:14 PM</span>
+            </div>
+
+            <p class="jny-card-desc jny-final-desc" style="text-align: center; font-size: 13.5px; color: #fff5c0;">
+              Our forever begins.
+            </p>
+
+            <!-- Wedding Mandap Illustration -->
+            <div class="jny-card-illust-box" style="padding: 14px 10px 10px;">
+              <svg viewBox="0 0 260 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Temple Pillars -->
+                <rect x="45" y="24" width="10" height="55" rx="3" fill="#d4a445" />
+                <rect x="205" y="24" width="10" height="55" rx="3" fill="#d4a445" />
+                <!-- Mandap Roof Arch -->
+                <path d="M35 24 Q130 -5 225 24" stroke="#f5d878" stroke-width="3" fill="none" />
+                <path d="M45 28 Q130 4 215 28" stroke="#d4a445" stroke-width="1.5" fill="none" />
+                <!-- Temple Bells -->
+                <path d="M85 24 L85 36 M175 24 L175 36" stroke="#d4a445" stroke-width="1.5" />
+                <path d="M80 36 Q85 44 90 36 Z" fill="#f5d878" />
+                <path d="M170 36 Q175 44 180 36 Z" fill="#f5d878" />
+                <!-- Sacred Fire (Havan Kund) -->
+                <path d="M110 72 L150 72 L145 60 L115 60 Z" fill="#d4a445" stroke="#f5d878" stroke-width="1" />
+                <path d="M120 60 Q130 42 140 60 Z" fill="#ff7700" />
+                <path d="M125 60 Q130 48 135 60 Z" fill="#ffcc00" />
+              </svg>
+            </div>
+
+            <!-- Final Journey Celebration Banner -->
+            <div class="jny-final-banner">
+              <div class="jny-final-banner-text-1">The Journey Ends...</div>
+              <div class="jny-final-banner-text-2">Our Forever Begins ❤️</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </section>
 
     <!-- Slide 4: Our Story -->
@@ -2653,13 +3386,11 @@
       PC.appendChild(p);
     }
 
-    // ── Butterflies ────────────────────────────────────
+    // ── Butterflies (Max 3 at a time) ───────────────────
     const BCFG = [
-      { sx: -8, sy: 28, size: 50, dur: 22, delay: 0, yb: -100, cA: '#f472b6', cB: '#a855f7', cC: '#ec4899', glow: 'rgba(244,114,182,.7)' },
-      { sx: -5, sy: 60, size: 42, dur: 26, delay: 4, yb: 60, cA: '#c084fc', cB: '#818cf8', cC: '#a78bfa', glow: 'rgba(192,132,252,.7)' },
-      { sx: -9, sy: 18, size: 56, dur: 20, delay: 8, yb: -55, cA: '#fb923c', cB: '#f472b6', cC: '#fbbf24', glow: 'rgba(251,146,60,.7)' },
-      { sx: -6, sy: 72, size: 46, dur: 24, delay: 12, yb: 90, cA: '#34d399', cB: '#60a5fa', cC: '#a78bfa', glow: 'rgba(52,211,153,.7)' },
-      { sx: -4, sy: 44, size: 54, dur: 28, delay: 16, yb: -28, cA: '#f9a8d4', cB: '#c084fc', cC: '#93c5fd', glow: 'rgba(249,168,212,.8)' },
+      { sx: -8, sy: 28, size: 44, dur: 22, delay: 0, yb: -50, cA: '#f472b6', cB: '#a855f7', cC: '#ec4899', glow: 'rgba(244,114,182,.5)' },
+      { sx: -5, sy: 55, size: 38, dur: 26, delay: 8, yb: 30, cA: '#c084fc', cB: '#818cf8', cC: '#a78bfa', glow: 'rgba(192,132,252,.5)' },
+      { sx: -9, sy: 75, size: 40, dur: 24, delay: 16, yb: 60, cA: '#fb923c', cB: '#f472b6', cC: '#fbbf24', glow: 'rgba(251,146,60,.5)' },
     ];
     const BC = document.getElementById('butterflies');
     let uid = 0;
@@ -2842,31 +3573,61 @@
       goToSlide(0);
     })();
 
+    // ── Smooth Scroll Interceptor & Hash Prevention ────
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
     // ── Curtain opening event ─────────────────────────
     (function () {
       const curtain = document.getElementById('curtain');
       let opened = false;
 
-      // Prevent browser from restoring scroll position to lower sections on reload
+      // Prevent browser from restoring scroll position to lower sections or hashes on reload
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
+
+      if (window.location.hash) {
+        history.replaceState(null, null, window.location.pathname + window.location.search);
+      }
+
+      document.documentElement.classList.add('curtain-active');
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
       window.scrollTo(0, 0);
+
+      function resetToHero() {
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        const heroEl = document.getElementById('hero');
+        if (heroEl) heroEl.scrollIntoView({ behavior: 'instant' });
+      }
+
+      window.addEventListener('beforeunload', resetToHero);
+      window.addEventListener('load', resetToHero);
+      resetToHero();
 
       function openCurtain() {
         if (opened) return;
         opened = true;
 
-        // Immediately scroll to Hero section (top 0) when curtain is clicked
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        const heroEl = document.getElementById('hero');
-        if (heroEl) heroEl.scrollIntoView({ behavior: 'instant' });
-
+        resetToHero();
         curtain.classList.add('opening');
 
         setTimeout(() => {
           document.body.classList.remove('curtain-on');
-          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+          document.documentElement.classList.remove('curtain-active');
+          resetToHero();
+
           setTimeout(() => document.getElementById('floralTL').classList.add('show'), 6600);
           setTimeout(() => document.getElementById('floralBR').classList.add('show'), 6800);
         }, 1000);
@@ -2924,6 +3685,77 @@
 
       tryPlay();
     });
+
+    // ══════════════════════════════════════════════════
+    // WEDDING EVENTS JOURNEY — Interactive Engine
+    // ══════════════════════════════════════════════════
+    (function () {
+      const journeySec = document.getElementById('journey');
+      const train = document.getElementById('jnyTrain');
+      const timeline = document.getElementById('jnyTimeline');
+      const stations = document.querySelectorAll('.jny-station-item');
+
+      if (!journeySec || !train || !timeline || stations.length === 0) return;
+
+      // Create sparkles dynamically in final station banner
+      const finalBanner = document.querySelector('.jny-final-banner');
+      if (finalBanner) {
+        for (let i = 0; i < 8; i++) {
+          const sp = document.createElement('div');
+          sp.className = 'jny-sparkle-particle';
+          sp.style.left = (10 + Math.random() * 80) + '%';
+          sp.style.top = (10 + Math.random() * 80) + '%';
+          sp.style.animationDelay = (Math.random() * 1.8) + 's';
+          finalBanner.appendChild(sp);
+        }
+      }
+
+      function updateTrainPosition() {
+        const timelineRect = timeline.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const timelineHeight = timelineRect.height;
+        if (timelineHeight <= 0) return;
+
+        // Train starts at top (0px) when timeline top is at 20% of viewport (Station 1 entrance)
+        // Train reaches bottom when timeline bottom reaches 85% of viewport
+        const startTrigger = viewportHeight * 0.2;
+        const endTrigger = viewportHeight * 0.85;
+
+        const currentPos = startTrigger - timelineRect.top;
+        const maxPos = timelineHeight - (endTrigger - startTrigger);
+
+        let progress = currentPos / Math.max(1, maxPos);
+        progress = Math.max(0, Math.min(1, progress));
+
+        // Train moves from top (0px) down to the end of the track (timelineHeight - 185px)
+        const maxTrainY = Math.max(0, timelineHeight - 185);
+        const trainY = progress * maxTrainY;
+
+        train.style.transform = `translateY(${trainY}px)`;
+
+        // Highlight stations based on scroll position
+        stations.forEach((st) => {
+          const stRect = st.getBoundingClientRect();
+          const stCenter = stRect.top + stRect.height / 2;
+
+          if (stCenter < viewportHeight * 0.75) {
+            if (stCenter < viewportHeight * 0.35) {
+              st.classList.add('reached');
+              st.classList.remove('active');
+            } else {
+              st.classList.add('active');
+              st.classList.remove('reached');
+            }
+          } else {
+            st.classList.remove('active', 'reached');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateTrainPosition, { passive: true });
+      window.addEventListener('resize', updateTrainPosition, { passive: true });
+      updateTrainPosition();
+    })();
   </script>
 
   <!-- Audio -->
