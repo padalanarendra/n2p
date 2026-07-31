@@ -553,7 +553,7 @@
     .hero-scroll-indicator {
       position: relative;
       bottom: auto;
-      margin-top: 0;
+      margin-top: -20px;
       z-index: 3;
       padding: 8px 22px;
       border-radius: 24px;
@@ -566,6 +566,7 @@
       align-items: center;
       gap: 4px;
       text-decoration: none;
+      animation: fadeUpHero 1s 3.5s ease forwards;
     }
 
     .hero-scroll-indicator .scroll-text {
@@ -613,6 +614,18 @@
       to {
         opacity: 1;
         transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUpHero {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(-20px);
       }
     }
 
@@ -2157,6 +2170,428 @@
         transform: scale(1.4);
       }
     }
+
+    /* ══════════════════════════════════════
+       Slide 5: Thank You & Blessings (Grand Finale)
+    ══════════════════════════════════════ */
+    .thank-you-slide {
+      min-height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(24px, 4vh, 48px) 16px clamp(24px, 4vh, 48px);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      position: relative;
+      z-index: 10;
+    }
+
+    .ty-card {
+      width: 100%;
+      max-width: 780px;
+      padding: clamp(28px, 4.5vw, 48px) clamp(18px, 3.5vw, 36px);
+      border-radius: 28px;
+      background: rgba(14, 8, 26, 0.72);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid rgba(212, 164, 69, 0.38);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), inset 0 0 40px rgba(212, 164, 69, 0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.94) translateY(24px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+    }
+
+    .thank-you-slide.reveal .ty-card {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    .ty-card:hover {
+      border-color: rgba(245, 216, 120, 0.7);
+    }
+
+    /* Top Header Block */
+    .ty-header-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-bottom: clamp(16px, 2.5vh, 24px);
+    }
+
+    .ty-bfly-top {
+      animation: floatBfly 3s ease-in-out infinite alternate;
+      margin-bottom: 6px;
+      filter: drop-shadow(0 0 10px rgba(245, 216, 120, 0.8));
+    }
+
+    @keyframes floatBfly {
+      from {
+        transform: translateY(0) rotate(-3deg);
+      }
+
+      to {
+        transform: translateY(-8px) rotate(3deg);
+      }
+    }
+
+    .ty-title {
+      font-family: 'Cinzel Decorative', 'Cinzel', serif;
+      font-size: clamp(30px, 5.5vw, 54px);
+      font-weight: 700;
+      color: #f5d878;
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 25px rgba(212, 164, 69, 0.5), 0 2px 10px rgba(0, 0, 0, 0.9);
+      margin-bottom: 4px;
+    }
+
+    .ty-heart-orn {
+      font-size: clamp(14px, 2vw, 20px);
+      color: #e05070;
+      margin-bottom: 12px;
+      animation: heartPulse 1.8s ease-in-out infinite;
+    }
+
+    .ty-sub-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.4vw, 23px);
+      font-style: italic;
+      font-weight: 400;
+      color: #fff5c0;
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+      text-shadow: 0 0 15px rgba(245, 216, 120, 0.35);
+      margin-bottom: 14px;
+    }
+
+    .ty-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .ty-line {
+      width: clamp(40px, 8vw, 90px);
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4a445, transparent);
+    }
+
+    .ty-diamond {
+      color: #d4a445;
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    /* Central Moon Artwork Showcase */
+    .ty-moon-container {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: clamp(12px, 2vh, 22px) 0;
+    }
+
+    .ty-moon-frame {
+      position: relative;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(245, 216, 120, 0.45);
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75), 0 0 35px rgba(212, 164, 69, 0.25);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+
+    .ty-moon-frame:hover {
+      transform: scale(1.015);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, 0.85), 0 0 45px rgba(245, 216, 120, 0.4);
+    }
+
+    .ty-moon-img {
+      width: 100%;
+      height: auto;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .ty-moon-frame:hover .ty-moon-img {
+      transform: scale(1.03);
+    }
+
+    .ty-moon-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 4, 14, 0.3) 0%, transparent 40%, transparent 70%, rgba(7, 4, 14, 0.5) 100%);
+      pointer-events: none;
+    }
+
+    /* Animated Side Lanterns */
+    .ty-lantern-wrap {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: clamp(38px, 6vw, 54px);
+      z-index: 5;
+      pointer-events: none;
+      filter: drop-shadow(0 0 12px rgba(245, 216, 120, 0.8));
+    }
+
+    .ty-lantern-wrap.left {
+      left: clamp(-15px, -2vw, -24px);
+    }
+
+    .ty-lantern-wrap.right {
+      right: clamp(-15px, -2vw, -24px);
+    }
+
+    .ty-lantern-svg {
+      width: 100%;
+      height: auto;
+    }
+
+    .ty-candle-flame {
+      animation: candleFlicker 1.5s ease-in-out infinite alternate;
+      transform-origin: center bottom;
+    }
+
+    @keyframes candleFlicker {
+      0% {
+        transform: scale(1) translateY(0);
+        opacity: 0.85;
+        filter: drop-shadow(0 0 4px #ffaa00);
+      }
+
+      50% {
+        transform: scale(1.15) translateY(-1px);
+        opacity: 1;
+        filter: drop-shadow(0 0 10px #ffe066);
+      }
+
+      100% {
+        transform: scale(0.92) translateY(1px);
+        opacity: 0.9;
+        filter: drop-shadow(0 0 6px #ff8800);
+      }
+    }
+
+    /* Heartfully Inviting Block */
+    .ty-inv-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin-top: clamp(14px, 2vh, 22px);
+    }
+
+    .ty-heart-flourish {
+      color: #e05070;
+      font-size: clamp(16px, 2vw, 22px);
+      margin-bottom: 6px;
+      filter: drop-shadow(0 0 8px rgba(224, 80, 112, 0.7));
+    }
+
+    .ty-inv-heading {
+      font-family: 'Cinzel', 'Outfit', sans-serif;
+      font-size: clamp(18px, 3.2vw, 30px);
+      font-weight: 700;
+      color: #f5d878;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(212, 164, 69, 0.4);
+      margin-bottom: 4px;
+    }
+
+    .ty-inv-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(10px, 1.3vw, 13px);
+      font-weight: 300;
+      color: rgba(212, 164, 69, 0.85);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .ty-welcome-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.3vw, 22px);
+      font-style: italic;
+      line-height: 1.55;
+      color: #ffffff;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .ty-w-heart {
+      color: #e05070;
+      font-size: 13px;
+      margin: 0 4px;
+    }
+
+    .ty-heart-dot {
+      color: #d4a445;
+      font-size: 12px;
+      opacity: 0.8;
+      margin: 6px 0;
+    }
+
+    /* Glassmorphic Blessing Card */
+    .ty-blessing-card {
+      width: 100%;
+      max-width: 520px;
+      margin: 12px 0 16px;
+      padding: clamp(18px, 3vw, 26px) clamp(16px, 2.5vw, 24px);
+      border-radius: 20px;
+      background: rgba(22, 12, 40, 0.85);
+      border: 1px solid rgba(245, 216, 120, 0.4);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(245, 216, 120, 0.05);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .ty-blessing-card:hover {
+      border-color: rgba(245, 216, 120, 0.75);
+      transform: translateY(-2px);
+    }
+
+    .ty-namaste-icon {
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 12px rgba(245, 216, 120, 0.6));
+      animation: pulseGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from {
+        transform: scale(1);
+        filter: drop-shadow(0 0 8px rgba(245, 216, 120, 0.5));
+      }
+
+      to {
+        transform: scale(1.08);
+        filter: drop-shadow(0 0 16px rgba(245, 216, 120, 0.9));
+      }
+    }
+
+    .ty-blessing-title {
+      font-family: 'Outfit', 'DM Sans', sans-serif;
+      font-size: clamp(12px, 1.8vw, 15px);
+      font-weight: 600;
+      color: #f5d878;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .ty-arrow {
+      color: #d4a445;
+      font-size: 14px;
+    }
+
+    .ty-blessing-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(12px, 1.6vw, 14px);
+      font-weight: 300;
+      color: #b8b1c7;
+      margin-bottom: 16px;
+    }
+
+    .ty-bless-btn {
+      padding: 10px 24px;
+      border-radius: 24px;
+      border: 1px solid rgba(245, 216, 120, 0.6);
+      background: linear-gradient(135deg, rgba(212, 164, 69, 0.25), rgba(224, 80, 112, 0.25));
+      color: #fff5c0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(12px, 1.5vw, 14px);
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .ty-bless-btn:hover {
+      background: linear-gradient(135deg, rgba(212, 164, 69, 0.45), rgba(224, 80, 112, 0.45));
+      transform: scale(1.05);
+      border-color: #f5d878;
+      box-shadow: 0 6px 20px rgba(245, 216, 120, 0.4);
+    }
+
+    .ty-bless-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Footer Banner */
+    .ty-footer-banner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+
+    .ty-fl-wing {
+      color: #d4a445;
+      font-size: 16px;
+    }
+
+    .ty-footer-text {
+      font-family: 'Cinzel', 'Outfit', serif;
+      font-size: clamp(14px, 2.2vw, 20px);
+      font-weight: 700;
+      color: #f5d878;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(245, 216, 120, 0.4);
+    }
+
+    .ty-bot-bfly {
+      margin-top: 4px;
+      opacity: 0.85;
+      animation: floatBfly 3s ease-in-out infinite alternate;
+    }
+
+    /* Floating Particles for Interactive Blessings Button */
+    .blessing-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      font-size: 20px;
+      animation: floatUpParticle 2.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes floatUpParticle {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(0.5) rotate(0deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(var(--dx), var(--dy)) scale(1.6) rotate(var(--rot));
+      }
+    }
   </style>
 </head>
 
@@ -3377,15 +3812,91 @@
 
     </section>
 
-    <!-- Slide 4: Our Story -->
-    <section class="story-section" id="story">
-      <div class="story-card">
-        <h2 class="std-title" style="font-size: clamp(28px, 4vw, 48px); margin-bottom: 14px;">Our Story</h2>
-        <div class="inv-line"></div>
-        <p class="inv-text" style="font-size: clamp(15px, 2vw, 22px); margin-top: 14px;">
-          "Two souls with but a single thought,<br>
-          Two hearts that beat as one."
-        </p>
+    <!-- Slide 5: Heartfully Inviting & See You There (Grand Finale Slide) -->
+    <section class="thank-you-slide" id="story">
+      <div class="ty-card">
+
+        <!-- Top Golden Header Block above Moon Image -->
+        <div class="ty-header-block">
+          <div class="ty-heart-flourish">♡</div>
+
+          <h3 class="ty-inv-heading">HEARTFULLY INVITING YOU</h3>
+          <p class="ty-inv-sub">TO BE A PART OF OUR SPECIAL DAYS</p>
+
+          <div class="ty-divider">
+            <span class="ty-line"></span>
+            <span class="ty-diamond">✦</span>
+            <span class="ty-line"></span>
+          </div>
+        </div>
+
+        <!-- Central Moon & Couple Art Display -->
+        <div class="ty-moon-container">
+          <!-- Lantern Left -->
+          <div class="ty-lantern-wrap left">
+            <svg class="ty-lantern-svg" viewBox="0 0 60 100" fill="none">
+              <path d="M30 0 L30 15" stroke="#d4a445" stroke-width="1.8" />
+              <path d="M18 15 L42 15 L38 22 L22 22 Z" fill="#d4a445" />
+              <path d="M20 22 L40 22 L44 70 L16 70 Z" fill="rgba(212,164,69,0.12)" stroke="#d4a445"
+                stroke-width="1.5" />
+              <ellipse cx="30" cy="55" rx="5" ry="9" fill="#ffaa00" class="ty-candle-flame" />
+              <ellipse cx="30" cy="56" rx="3" ry="5" fill="#fff5c0" class="ty-candle-flame" />
+              <path d="M14 70 L46 70 L48 78 L12 78 Z" fill="#d4a445" />
+            </svg>
+          </div>
+
+          <!-- The Moon Image Frame -->
+          <div class="ty-moon-frame">
+            <img src="photos/moon.jpeg" alt="Narendra and Prasuna under the Full Moon" class="ty-moon-img"
+              loading="lazy" />
+            <div class="ty-moon-overlay"></div>
+          </div>
+
+          <!-- Lantern Right -->
+          <div class="ty-lantern-wrap right">
+            <svg class="ty-lantern-svg" viewBox="0 0 60 100" fill="none">
+              <path d="M30 0 L30 15" stroke="#d4a445" stroke-width="1.8" />
+              <path d="M18 15 L42 15 L38 22 L22 22 Z" fill="#d4a445" />
+              <path d="M20 22 L40 22 L44 70 L16 70 Z" fill="rgba(212,164,69,0.12)" stroke="#d4a445"
+                stroke-width="1.5" />
+              <ellipse cx="30" cy="55" rx="5" ry="9" fill="#ffaa00" class="ty-candle-flame" />
+              <ellipse cx="30" cy="56" rx="3" ry="5" fill="#fff5c0" class="ty-candle-flame" />
+              <path d="M14 70 L46 70 L48 78 L12 78 Z" fill="#d4a445" />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Remaining Welcome Message & Footer Section below Moon Image -->
+        <div class="ty-inv-block">
+          <p class="ty-welcome-msg">
+            <span class="ty-w-heart">♥</span>
+            We warmly welcome you
+            <span class="ty-w-heart">♥</span><br>
+            to celebrate, create beautiful memories<br>
+            and bless us with your love.
+          </p>
+
+          <div class="ty-heart-dot" style="margin: 10px 0 16px 0;">♡</div>
+
+          <!-- Footer Banner -->
+          <div class="ty-footer-banner">
+            <span class="ty-fl-wing">☙</span>
+            <span class="ty-footer-text">SEE YOU THERE!</span>
+            <span class="ty-fl-wing">❧</span>
+          </div>
+
+          <!-- Golden Namaskaram Icon below SEE YOU THERE! -->
+          <div class="ty-bot-namaste" style="margin-top: 6px; display: inline-flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 10px rgba(245, 216, 120, 0.7));">
+            <svg width="30" height="30" viewBox="0 0 60 60" fill="none">
+              <path d="M30 10 C27 22 22 36 18 45 C16 50 20 54 25 50 C28 48 30 38 30 38 C30 38 32 48 35 50 C40 54 44 50 42 45 C38 36 33 22 30 10 Z" fill="#f5d878" stroke="#d4a445" stroke-width="1.2" />
+              <path d="M30 10 C28 22 24 36 21 44 C19 49 23 52 27 49 C29 47 30 38 30 38" fill="#ffe066" />
+              <line x1="30" y1="4" x2="30" y2="0" stroke="#f5d878" stroke-width="2" stroke-linecap="round" />
+              <line x1="20" y1="8" x2="16" y2="4" stroke="#f5d878" stroke-width="1.5" stroke-linecap="round" />
+              <line x1="40" y1="8" x2="44" y2="4" stroke="#f5d878" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+
       </div>
     </section>
   </main>
@@ -3549,7 +4060,7 @@
       });
     }, { threshold: 0.65 });
 
-    document.querySelectorAll('.save-date-slide, .meet-couple-card, .story-card').forEach(el => observer.observe(el));
+    document.querySelectorAll('.save-date-slide, .meet-couple-card, .story-card, .thank-you-slide, .ty-card').forEach(el => observer.observe(el));
 
     // ── Meet the Couple Slider Script ──────────────────
     (function () {
@@ -3869,6 +4380,48 @@
       window.addEventListener('scroll', onScrollOrResize, { passive: true });
       window.addEventListener('resize', onScrollOrResize, { passive: true });
       onScrollOrResize();
+    })();
+
+    // ── Interactive Blessings Button Feature ────────────
+    (function () {
+      const blessBtn = document.getElementById('tyBlessBtn');
+      if (!blessBtn) return;
+
+      const icons = ['❤️', '✨', '💖', '🌸', '🙏', '✦', '💕', '⭐'];
+
+      blessBtn.addEventListener('click', function (e) {
+        const rect = blessBtn.getBoundingClientRect();
+        const startX = rect.left + rect.width / 2;
+        const startY = rect.top + rect.height / 2;
+
+        for (let i = 0; i < 28; i++) {
+          const p = document.createElement('div');
+          p.className = 'blessing-particle';
+          p.textContent = icons[Math.floor(Math.random() * icons.length)];
+          p.style.left = startX + 'px';
+          p.style.top = startY + 'px';
+
+          const dx = (Math.random() - 0.5) * 280 + 'px';
+          const dy = -(Math.random() * 200 + 90) + 'px';
+          const rot = (Math.random() - 0.5) * 360 + 'deg';
+
+          p.style.setProperty('--dx', dx);
+          p.style.setProperty('--dy', dy);
+          p.style.setProperty('--rot', rot);
+          p.style.fontSize = (14 + Math.random() * 16) + 'px';
+
+          document.body.appendChild(p);
+          setTimeout(() => p.remove(), 2200);
+        }
+
+        const origText = blessBtn.innerHTML;
+        blessBtn.innerHTML = '<span>✨ Blessings Received! Thank You! ✨</span>';
+        blessBtn.style.background = 'linear-gradient(135deg, rgba(245, 216, 120, 0.6), rgba(224, 80, 112, 0.6))';
+        setTimeout(() => {
+          blessBtn.innerHTML = origText;
+          blessBtn.style.background = '';
+        }, 3000);
+      });
     })();
   </script>
 
