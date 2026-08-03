@@ -378,12 +378,13 @@
 
     .name-narendra,
     .name-prasuna {
-      font-family: 'Outfit', 'Cinzel', 'DM Sans', sans-serif;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
       font-size: clamp(28px, 5vw, 46px);
       font-weight: 600;
       color: #E8D6A7;
-      letter-spacing: 6px;
-      text-transform: uppercase;
+      letter-spacing: 4px;
+      text-transform: capitalize;
       display: block;
       background: none;
       -webkit-background-clip: unset;
@@ -2106,6 +2107,41 @@
       background: linear-gradient(160deg, rgba(32, 18, 54, 0.95) 0%, rgba(14, 7, 24, 0.98) 100%);
       border: 1.5px solid rgba(245, 216, 120, 0.6);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(245, 216, 120, 0.3);
+      flex-direction: column;
+      padding: clamp(16px, 3vw, 24px);
+      gap: 14px;
+    }
+
+    .jny-final-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: 12px;
+    }
+
+    .jny-final-info {
+      flex: 1 1 58%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+
+    .jny-final-img-wrap {
+      flex: 0 0 38%;
+      max-width: 140px;
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .jny-final-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 0 16px rgba(245, 216, 120, 0.45));
     }
 
     .jny-final-title-wrap {
@@ -2139,39 +2175,45 @@
       font-weight: 700 !important;
       border: none !important;
       box-shadow: 0 0 12px rgba(245, 216, 120, 0.5);
+      letter-spacing: 0.12em;
     }
 
-    /* Merged Climax Box Inside Marriage Card */
+    /* Merged Full-Width Climax Box Inside Marriage Card */
     .jny-merged-forever-block {
-      margin-top: 6px;
-      padding: 8px 12px;
-      border-radius: 12px;
-      background: rgba(212, 164, 69, 0.08);
+      margin-top: 4px;
+      padding: 12px 16px;
+      border-radius: 16px;
+      background: rgba(22, 12, 40, 0.75);
       border: 1px dashed rgba(245, 216, 120, 0.4);
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
       width: 100%;
       position: relative;
+      box-shadow: inset 0 0 20px rgba(245, 216, 120, 0.05);
     }
 
     .jny-forever-sub {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 13px;
-      color: #b8b1c7;
-      margin-bottom: 2px;
+      font-size: clamp(14px, 2.3vw, 17px);
+      color: #d1c9e0;
+      letter-spacing: 0.05em;
     }
 
     .jny-forever-main {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(15px, 2.8vw, 19px);
+      font-size: clamp(18px, 3.5vw, 24px);
       font-weight: 600;
       color: #fff5c0;
-      text-shadow: 0 0 14px rgba(245, 216, 120, 0.6);
+      text-shadow: 0 0 16px rgba(245, 216, 120, 0.7);
       display: flex;
       align-items: center;
-      gap: 6px;
+      justify-content: center;
+      width: 100%;
+      gap: 10px;
+      white-space: nowrap;
     }
 
     /* Bottom Banner Card */
@@ -2187,16 +2229,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 4px;
       text-align: center;
       position: relative;
       overflow: hidden;
+      width: 100%;
     }
 
     .jny-bottom-text-sub {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 15.5px;
-      color: #b8b1c7;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      color: rgba(212, 164, 69, 0.85);
+      text-transform: uppercase;
       margin-bottom: 4px;
     }
 
@@ -2234,30 +2279,40 @@
     }
 
     @keyframes bflyFloat {
-      0% { transform: translateY(0) rotate(0deg); }
-      100% { transform: translateY(-6px) rotate(6deg); }
+      0% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      100% {
+        transform: translateY(-6px) rotate(6deg);
+      }
     }
 
     @media (max-width: 600px) {
       .jny-timeline-container {
         padding-left: 48px;
       }
+
       .jny-event-card {
         padding: 14px 12px;
         gap: 10px;
         min-height: 145px;
       }
+
       .jny-card-body {
         flex: 1 1 54%;
       }
+
       .jny-card-img-wrap {
         flex: 0 0 42%;
         width: 42%;
         height: 120px;
       }
+
       .jny-card-title {
         font-size: 19px;
       }
+
       .jny-card-desc {
         font-size: 10.5px;
         margin-bottom: 8px;
@@ -2286,7 +2341,7 @@
     .ty-card {
       width: 100%;
       max-width: 580px;
-      padding: clamp(18px, 2.8vh, 30px) clamp(16px, 3vw, 26px);
+      padding: clamp(32px, 4.5vh, 44px) clamp(18px, 3.5vw, 30px);
       border-radius: 26px;
       background: rgba(14, 8, 26, 0.78);
       backdrop-filter: blur(25px);
@@ -2319,7 +2374,8 @@
       flex-direction: column;
       align-items: center;
       width: 100%;
-      margin-bottom: clamp(8px, 1.4vh, 14px);
+      padding-top: 6px;
+      margin-bottom: clamp(10px, 1.8vh, 16px);
     }
 
     .ty-heart-flourish {
@@ -2408,6 +2464,19 @@
       pointer-events: none;
     }
 
+    .ty-moon-frame {
+      height: 440px;
+      /* Or max-height: 300px; */
+      /* ... */
+    }
+
+    .ty-moon-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      /* Ensures the image fills the frame cleanly */
+    }
+
     /* Animated Side Lanterns overlapping left/right border */
     .ty-lantern-wrap {
       position: absolute;
@@ -2425,18 +2494,6 @@
 
     .ty-lantern-wrap.right {
       right: clamp(-12px, -1.8vw, -16px);
-    }
-      z-index: 5;
-      pointer-events: none;
-      filter: drop-shadow(0 0 10px rgba(245, 216, 120, 0.8));
-    }
-
-    .ty-lantern-wrap.left {
-      left: clamp(8px, 3.5vw, 30px);
-    }
-
-    .ty-lantern-wrap.right {
-      right: clamp(8px, 3.5vw, 30px);
     }
 
     .ty-lantern-svg {
@@ -3127,7 +3184,7 @@
 
         <div class="names-stacked">
           <!-- 1. Narendra (Top) -->
-          <div class="letter-wrap-n"><span class="name-narendra">NARENDRA</span></div>
+          <div class="letter-wrap-n"><span class="name-narendra">Narendra</span></div>
 
           <!-- 3. weds in between (reveals later after Narendra & Prasuna appear together) -->
           <div class="weds-wrap">
@@ -3151,7 +3208,7 @@
           </div>
 
           <!-- 2. Prasuna (Bottom) -->
-          <div class="letter-wrap-p"><span class="name-prasuna">PRASUNA</span></div>
+          <div class="letter-wrap-p"><span class="name-prasuna">Prasuna</span></div>
         </div>
       </div>
 
@@ -3174,6 +3231,17 @@
     <section class="save-date-slide" id="saveTheDate">
       <div class="std-card">
         <span class="std-subtitle">✦ CELEBRATE WITH US ✦</span>
+
+        <!-- Heartfelt Small Invitation Message -->
+        <div class="invitation-message-box">
+          <div class="inv-line"></div>
+          <p class="inv-text">
+            Green light received,<br>
+            The roadmap is set.
+          </p>
+          <div class="inv-line"></div>
+        </div>
+
         <h2 class="std-title">Save The Date</h2>
 
         <!-- Butterfly Veil Date Reveal Container -->
@@ -3272,16 +3340,7 @@
           </div>
         </div>
 
-        <!-- Heartfelt Small Invitation Message -->
-        <div class="invitation-message-box">
-          <div class="inv-line"></div>
-          <p class="inv-text">
-            With joyful hearts and the blessings of our families,<br>
-            we warmly invite you to share in our happiness<br>
-            as we celebrate the beginning of our forever.
-          </p>
-          <div class="inv-line"></div>
-        </div>
+
       </div>
 
       <!-- Bouncing Scroll Down Indicator to Meet the Couple -->
@@ -3664,7 +3723,8 @@
 
               <div class="journey-content-block">
                 <p class="journey-para">
-                  We work at <span style="color: #fff5c0;">Deloitte</span>
+                  From <span style="color: #fff5c0;">Deloitte</span> to
+                  <span style="color: #fff5c0;"> ‘Delight-ed’</span>
                 </p>
                 <p class="journey-para" style="color: #fff5c0;">
                   Now entering a lifelong project with no rollback plan. </p>
@@ -3868,7 +3928,7 @@
 
       <!-- Bottom Quote Banner below Card -->
       <div class="couple-bottom-quote-banner">
-        <p class="couple-quote-text">🌿 &ldquo;Two souls. One love. A lifetime to go.&rdquo; 🌿</p>
+        <p class="couple-quote-text">🌿 &ldquo;One partnership. Infinite milestones.&rdquo; 🌿</p>
         <div style="color: #e05070; font-size: 14px;">♡</div>
       </div>
 
@@ -3898,7 +3958,7 @@
         <span class="jny-header-badge">✦ OUR WEDDING EVENTS ✦</span>
         <h2 class="jny-main-title">The Journey Continues</h2>
         <p class="jny-subtitle-text">
-          "Every journey has a destination. Ours now arrives at the most beautiful celebration of our lives."
+          "The train is leaving the station. Don’t miss celebration!"
         </p>
         <div class="jny-header-divider">
           <div class="line"></div>
@@ -4089,50 +4149,101 @@
           <div class="jny-station-connector"></div>
 
           <div class="jny-event-card">
-            <div class="jny-card-body">
-              <div class="jny-card-top-row" style="margin-bottom: 4px;">
-                <span class="jny-station-number jny-final-badge">FINAL DESTINATION</span>
-              </div>
-              <div class="jny-final-title-wrap">
-                <span class="jny-final-crown">👑</span>
-                <h3 class="jny-card-title" style="margin: 0;">Marriage</h3>
-              </div>
-              <div class="jny-card-date-pill" style="margin-bottom: 6px;">
-                <span style="color: #f5d878; font-weight: 600;">26 August</span>
-                <span class="time-tag" style="color: #fff5c0; font-weight: 500;">· 10:14 PM</span>
-              </div>
-              
-              <!-- Merged Romantic Climax Banner -->
-              <div class="jny-merged-forever-block">
-                <div class="jny-forever-sub">The Journey Ends...</div>
-                <div class="jny-forever-main">
-                  Our Forever Begins <span class="jny-heart-pill">💖</span>
+            <!-- Top Row: Station Info on Left, Mandap Illustration on Right -->
+            <div class="jny-final-top-row">
+              <div class="jny-final-info">
+                <div class="jny-card-top-row" style="margin-bottom: 4px;">
+                  <span class="jny-station-number jny-final-badge">✦ FINAL DESTINATION ✦</span>
+                </div>
+
+                <div class="jny-final-title-wrap">
+                  <span class="jny-final-crown">👑</span>
+                  <h3 class="jny-card-title"
+                    style="margin: 0; font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 32px); font-weight: 600;">
+                    Marriage</h3>
+                </div>
+
+                <!-- Ornate Gold Line -->
+                <div
+                  style="display: flex; align-items: center; gap: 6px; margin: 2px 0 6px 0; width: 100%; max-width: 170px; opacity: 0.45;">
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #d4a445);"></div>
+                  <span style="color: #d4a445; font-size: 8px;">❖</span>
+                  <div style="flex: 1; height: 1px; background: linear-gradient(90deg, #d4a445, transparent);"></div>
+                </div>
+
+                <!-- Date & Time Pill -->
+                <div class="jny-card-date-pill" style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                  <span
+                    style="color: #f5d878; font-weight: 500; white-space: nowrap; display: flex; align-items: center; gap: 5px;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5d878" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      style="filter: drop-shadow(0 0 4px rgba(245, 216, 120, 0.6)); display: inline-block; vertical-align: middle;">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    26 August
+                  </span>
+                  <span class="time-tag"
+                    style="color: #fff5c0; font-weight: 500; white-space: nowrap; display: flex; align-items: center; gap: 5px;">
+                    ·
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f5d878" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      style="filter: drop-shadow(0 0 4px rgba(245, 216, 120, 0.6)); display: inline-block; vertical-align: middle;">
+                      <circle cx="12" cy="12" r="10"></circle>
+                      <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    10:14 PM
+                  </span>
                 </div>
               </div>
-            </div>
-            <div class="jny-card-img-wrap">
-              <img src="photos/marraige.png" alt="Marriage" class="jny-card-img" />
+
+              <!-- Mandap Image Wrap -->
+              <div class="jny-final-img-wrap">
+                <img src="photos/marraige.png" alt="Marriage Mandap" />
+              </div>
             </div>
 
-            <!-- Purple Butterfly floating near final station -->
-            <svg class="jny-bfly-accent" style="right: 10px; bottom: 8px; width: 24px; height: 24px;" viewBox="0 0 40 40">
-              <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85"/>
-              <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85"/>
+            <!-- Full-Width Climax Block Across Bottom -->
+            <div class="jny-merged-forever-block">
+              <div class="jny-forever-sub">The Journey completes</div>
+
+              <!-- Inner Heart Line -->
+              <div
+                style="display: flex; align-items: center; gap: 8px; margin: 6px 0; width: 100%; max-width: 260px; opacity: 0.4;">
+                <div style="flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #d4a445);"></div>
+                <span style="color: #d4a445; font-size: 9px;">♥</span>
+                <div style="flex: 1; height: 1px; background: linear-gradient(90deg, #d4a445, transparent);"></div>
+              </div>
+
+              <div class="jny-forever-main">
+                <span>Partnership begins.</span>
+                <span class="jny-heart-pill">💖</span>
+              </div>
+            </div>
+
+            <!-- Purple Butterfly floating in corner -->
+            <svg class="jny-bfly-accent" style="right: 12px; bottom: 10px; width: 22px; height: 22px; opacity: 0.75;"
+              viewBox="0 0 40 40">
+              <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85" />
+              <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85" />
             </svg>
           </div>
-        <!-- Scroll Down Indicator to Venue -->
-        <div style="display: flex; justify-content: center; width: 100%; margin-top: 24px;">
-          <a href="#venue" class="scroll-indicator std-section-scroll" aria-label="Scroll down to Celebration Venue">
-            <span class="scroll-text">Scroll Down</span>
-            <div class="scroll-arrow">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 5v14M5 12l7 7 7-7" />
-              </svg>
-            </div>
-          </a>
-        </div>
+          <!-- Scroll Down Indicator to Venue -->
+          <div style="display: flex; justify-content: center; width: 100%; margin-top: 24px;">
+            <a href="#venue" class="scroll-indicator std-section-scroll" aria-label="Scroll down to Celebration Venue">
+              <span class="scroll-text">Scroll Down</span>
+              <div class="scroll-arrow">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d4a445" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 5v14M5 12l7 7 7-7" />
+                </svg>
+              </div>
+            </a>
+          </div>
 
-      </div>
+        </div>
 
     </section>
 
@@ -4295,6 +4406,7 @@
 
         <!-- Top Golden Header Block above Moon Image -->
         <div class="ty-header-block">
+
           <h3 class="ty-inv-heading">HEARTFULLY INVITING YOU</h3>
           <p class="ty-inv-sub">TO BE A PART OF OUR SPECIAL DAYS</p>
 
@@ -4306,8 +4418,8 @@
 
           <!-- Purple Butterfly floating near top header -->
           <svg class="jny-bfly-accent" style="right: 18px; top: 18px; width: 28px; height: 28px;" viewBox="0 0 40 40">
-            <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85"/>
-            <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85"/>
+            <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85" />
+            <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85" />
           </svg>
         </div>
 
@@ -4315,7 +4427,8 @@
         <div class="ty-moon-container">
           <!-- Rectangular Moon Photo Frame (Uncropped full moon display) -->
           <div class="ty-moon-frame">
-            <img src="photos/moon.jpeg" alt="Narendra and Prasuna under the Full Moon" class="ty-moon-img" loading="lazy" />
+            <img src="photos/moon.jpeg" alt="Narendra and Prasuna under the Full Moon" class="ty-moon-img"
+              loading="lazy" />
             <div class="ty-moon-overlay"></div>
           </div>
         </div>
@@ -4324,10 +4437,9 @@
         <div class="ty-inv-block">
           <p class="ty-welcome-msg">
             <span class="ty-w-heart">♥</span>
-            We warmly welcome you
+            As the moon lights our way
             <span class="ty-w-heart">♥</span><br>
-            to celebrate, create beautiful memories<br>
-            and bless us with your love.
+            your presence will light our celebration.
           </p>
 
           <!-- Footer Banner -->
@@ -4337,9 +4449,10 @@
             <span class="ty-fl-wing">❧</span>
 
             <!-- Purple Butterfly floating near footer -->
-            <svg class="jny-bfly-accent" style="right: -30px; bottom: -8px; width: 26px; height: 26px;" viewBox="0 0 40 40">
-              <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85"/>
-              <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85"/>
+            <svg class="jny-bfly-accent" style="right: -30px; bottom: -8px; width: 26px; height: 26px;"
+              viewBox="0 0 40 40">
+              <path d="M20 20 Q10 8 5 18 Q0 28 15 23 Q20 20 20 20 Z" fill="#f472b6" opacity="0.85" />
+              <path d="M20 20 Q30 8 35 18 Q40 28 25 23 Q20 20 20 20 Z" fill="#c084fc" opacity="0.85" />
             </svg>
           </div>
 
